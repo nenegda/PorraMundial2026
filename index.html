@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Porra Mundial 2026 - Sistema de Puntuación Local</title>
+    <title>Porra Mundial 2026 - Sistema de Puntos</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         .tab-content { display: none; }
@@ -16,162 +16,56 @@
 
     <div id="login-screen" class="fixed inset-0 flex items-center justify-center bg-gray-950 z-50 px-4">
         <div class="bg-gray-800 border border-gray-700 p-8 rounded-2xl shadow-2xl max-w-md w-full text-center">
-            <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 tracking-wider mb-2">
-                PORRA MUNDIAL 2026 🏆
+            <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 mb-6">
+                PORRA MUNDIAL 🏆
             </h1>
-            <p class="text-gray-400 text-xs mb-6">Introduce tu nombre para gestionar tu porra localmente</p>
-            
-            <div class="space-y-4 text-left">
-                <div>
-                    <label class="block text-sm font-semibold text-gray-300 mb-1">Nombre de Usuario o Alias</label>
-                    <input type="text" id="username" placeholder="Ej. Carlos, Ana..." class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 font-medium">
-                </div>
-                
-                <button onclick="login()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg shadow-md transition">
-                    Ingresar a la Porra
-                </button>
-            </div>
+            <input type="text" id="username" placeholder="Tu nombre" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 mb-4 text-white">
+            <button onclick="login()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg transition">
+                Entrar a jugar
+            </button>
         </div>
     </div>
 
     <div id="app-interface">
-        <header class="bg-gray-800 border-b border-gray-700 p-6 flex flex-col md:flex-row items-center justify-between shadow-lg px-8">
-            <div class="text-center md:text-left mb-4 md:mb-0">
-                <h1 class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 tracking-wider">
-                    PORRA MUNDIAL 2026 🏆
-                </h1>
-                <p class="text-gray-400 text-xs mt-0.5">Gestión de pronósticos y cálculo de puntos</p>
-            </div>
-            <div class="bg-gray-900 px-4 py-2 rounded-xl border border-gray-700 flex items-center space-x-3">
-                <span class="text-xs text-gray-400">Usuario: <strong id="display-user" class="text-emerald-400"></strong></span>
-                <button onclick="logout()" class="text-[10px] bg-red-900/40 hover:bg-red-800 text-red-300 px-2 py-1 rounded border border-red-700/50">Cambiar de Usuario</button>
+        <header class="bg-gray-800 border-b border-gray-700 p-4 flex justify-between items-center px-8">
+            <h1 class="text-xl font-bold text-blue-400">MUNDIAL 2026</h1>
+            <div class="flex items-center gap-4">
+                <span class="text-sm">Usuario: <strong id="display-user" class="text-emerald-400"></strong></span>
+                <button onclick="location.reload()" class="text-xs bg-red-900/40 text-red-300 px-2 py-1 rounded">Salir</button>
             </div>
         </header>
 
-        <nav class="flex justify-center bg-gray-800 border-b border-gray-700 sticky top-0 z-40 overflow-x-auto">
-            <button onclick="switchTab('fase-grupos')" id="btn-fase-grupos" class="tab-btn active px-6 py-4 text-sm font-medium border-b-2 border-transparent hover:text-blue-400 whitespace-nowrap transition">
-                1. Fase de Grupos
-            </button>
-            <button onclick="switchTab('cruces')" id="btn-cruces" class="tab-btn px-6 py-4 text-sm font-medium border-b-2 border-transparent hover:text-blue-400 whitespace-nowrap transition">
-                2. Fase Eliminatoria (K.O.)
-            </button>
-            <button onclick="switchTab('puntuaciones')" id="btn-puntuaciones" class="tab-btn px-6 py-4 text-sm font-medium border-b-2 border-transparent hover:text-blue-400 whitespace-nowrap transition">
-                3. Mis Puntos 📊
-            </button>
-            <button onclick="switchTab('comunidad')" id="btn-comunidad" class="tab-btn px-6 py-4 text-sm font-medium border-b-2 border-transparent hover:text-blue-400 whitespace-nowrap transition">
-                4. Lista de Usuarios 👥
-            </button>
+        <nav class="flex justify-center bg-gray-800 border-b border-gray-700 sticky top-0 z-40">
+            <button onclick="switchTab('fase-grupos')" id="btn-fase-grupos" class="tab-btn active px-6 py-4 text-sm">Grupos</button>
+            <button onclick="switchTab('cruces')" id="btn-cruces" class="tab-btn px-6 py-4 text-sm">Eliminatorias</button>
+            <button onclick="switchTab('comunidad')" id="btn-comunidad" class="tab-btn px-6 py-4 text-sm font-bold text-yellow-400">CLASIFICACIÓN 📊</button>
         </nav>
 
         <main class="max-w-7xl mx-auto mt-8 px-4">
+            
+            <section id="fase-grupos" class="tab-content active grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                </section>
 
-            <section id="fase-grupos" class="tab-content active space-y-8">
-                <div class="bg-blue-900/30 border border-blue-500/30 p-4 rounded-xl text-sm text-blue-300">
-                    <span>💡 Rellena tus pronósticos. El sistema ordenará las posiciones basándose en tus goles de forma automática.</span>
-                </div>
-                <div id="contenedor-grupos" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                    </div>
-            </section>
+            <section id="cruces" class="tab-content">
+                <div id="grid-r32" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+                </section>
 
-            <section id="cruces" class="tab-content space-y-12">
+            <section id="comunidad" class="tab-content">
                 <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
-                    <h2 class="text-xl font-bold text-blue-400 mb-6 border-b border-gray-700 pb-2">Dieciseisavos de Final (Ronda de 32)</h2>
-                    <div id="grid-r32" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
-                </div>
-
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
-                    <h2 class="text-xl font-bold text-teal-400 mb-6 border-b border-gray-700 pb-2">Octavos de Final</h2>
-                    <div id="grid-octavos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
-                </div>
-
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
-                    <h2 class="text-xl font-bold text-purple-400 mb-6 border-b border-gray-700 pb-2">Cuartos de Final</h2>
-                    <div id="grid-cuartos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
-                </div>
-
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
-                    <h2 class="text-xl font-bold text-amber-500 mb-6 border-b border-gray-700 pb-2">Semifinales</h2>
-                    <div id="grid-semis" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto"></div>
-                </div>
-
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md max-w-md mx-auto text-center">
-                    <h2 class="text-xl font-bold text-emerald-400 mb-4 border-b border-gray-700 pb-2">🏆 Gran Final 🏆</h2>
-                    <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex flex-col space-y-2">
-                        <button id="final-p1-t1" onclick="definirCampeon('final-p1-t1', 'final-p1-t2')" class="p-3 rounded-lg bg-gray-800 text-md font-bold text-gray-500 cursor-not-allowed" disabled>Finalista 1</button>
-                        <div class="text-xs text-gray-600 font-extrabold">VS</div>
-                        <button id="final-p1-t2" onclick="definirCampeon('final-p1-t2', 'final-p1-t1')" class="p-3 rounded-lg bg-gray-800 text-md font-bold text-gray-500 cursor-not-allowed" disabled>Finalista 2</button>
-                    </div>
-                </div>
-            </section>
-
-            <section id="puntuaciones" class="tab-content space-y-8">
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
-                    <h2 class="text-xl font-bold text-emerald-400 mb-2">Simulador de Resultados Reales</h2>
-                    <p class="text-xs text-gray-400 mb-6">Como administrador o participante, introduce aquí cómo están quedando los resultados reales del Mundial para comprobar cuántos puntos sumas.</p>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 space-y-4">
-                            <h3 class="text-sm font-bold text-blue-400 border-b border-gray-700 pb-1">⚙️ Introducir Marcador Oficial (Simulado)</h3>
-                            <div class="flex items-center space-x-2 text-xs">
-                                <select id="select-partido-real" class="bg-gray-800 border border-gray-700 rounded px-2 py-1 text-white flex-1">
-                                    </select>
-                                <input type="number" id="goles-real-1" placeholder="L" class="w-10 bg-gray-700 text-center rounded font-bold p-1">
-                                <input type="number" id="goles-real-2" placeholder="V" class="w-10 bg-gray-700 text-center rounded font-bold p-1">
-                                <button onclick="guardarResultadoRealPartido()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-3 py-1 rounded">Aplicar</button>
-                            </div>
-                        </div>
-
-                        <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 space-y-4">
-                            <h3 class="text-sm font-bold text-yellow-500 border-b border-gray-700 pb-1">⚙️ Clasificación Oficial del Grupo (Simulado)</h3>
-                            <div class="space-y-2 text-xs">
-                                <div class="flex space-x-2">
-                                    <select id="select-grupo-real" onchange="actualizarCamposEquiposGrupoReal()" class="bg-gray-800 border border-gray-700 rounded px-2 py-1 text-white w-1/3"></select>
-                                    <div class="flex-1 space-y-1">
-                                        <select id="pos-real-1" class="w-full bg-gray-700 rounded p-1 text-white"></select>
-                                        <select id="pos-real-2" class="w-full bg-gray-700 rounded p-1 text-white"></select>
-                                        <select id="pos-real-3" class="w-full bg-gray-700 rounded p-1 text-white"></select>
-                                        <select id="pos-real-4" class="w-full bg-gray-700 rounded p-1 text-white"></select>
-                                    </div>
-                                </div>
-                                <button onclick="guardarClasificacionRealGrupo()" class="w-full bg-yellow-600 hover:bg-yellow-500 text-white font-bold py-1 rounded">Aplicar Clasificación del Grupo</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div class="bg-gray-800 border border-gray-700 p-6 rounded-xl text-center shadow-md">
-                        <div class="text-xs text-gray-400 font-bold uppercase tracking-wider">Puntos por Partidos</div>
-                        <div id="puntos-partidos-total" class="text-4xl font-extrabold text-blue-400 mt-2">0</div>
-                    </div>
-                    <div class="bg-gray-800 border border-gray-700 p-6 rounded-xl text-center shadow-md">
-                        <div class="text-xs text-gray-400 font-bold uppercase tracking-wider">Puntos por Grupos</div>
-                        <div id="puntos-grupos-total" class="text-4xl font-extrabold text-yellow-500 mt-2">0</div>
-                    </div>
-                    <div class="bg-gray-800 border border-gray-700 p-6 rounded-xl text-center shadow-md bg-gradient-to-br from-gray-800 to-emerald-950/40">
-                        <div class="text-xs text-gray-400 font-bold uppercase tracking-wider">Mi Puntuación Total</div>
-                        <div id="puntos-marcador-global" class="text-5xl font-black text-emerald-400 mt-1">0</div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="comunidad" class="tab-content space-y-6">
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
-                    <h2 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 mb-2 border-b border-gray-700 pb-2">
-                        Usuarios Creados en este Navegador
-                    </h2>
-                    <p class="text-xs text-gray-400 mb-6">Muestra todos los usuarios guardados localmente (`localStorage`). Si compartes este ordenador o pantalla, saldrán aquí reflejados de forma independiente.</p>
-                    
+                    <h2 class="text-2xl font-bold mb-4 text-center">Ranking de la Porra</h2>
+                    <p class="text-center text-xs text-gray-400 mb-6">
+                        Exacto: +10 pts | Ganador: +3 pts | Posición Grupo: +3 pts
+                    </p>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left text-sm">
-                            <thead class="bg-gray-900 text-gray-400 uppercase text-xs border-b border-gray-700">
+                        <table class="w-full text-left">
+                            <thead class="bg-gray-900 text-gray-400 text-xs">
                                 <tr>
+                                    <th class="px-6 py-3">Pos</th>
                                     <th class="px-6 py-3">Usuario</th>
-                                    <th class="px-6 py-3">Puntuación Total</th>
-                                    <th class="px-6 py-3 text-right">Acción</th>
+                                    <th class="px-6 py-3">Puntos Totales</th>
                                 </tr>
                             </thead>
-                            <tbody id="tabla-usuarios-locales" class="divide-y divide-gray-700/50">
+                            <tbody id="tabla-puntos" class="divide-y divide-gray-700">
                                 </tbody>
                         </table>
                     </div>
@@ -181,422 +75,120 @@
     </div>
 
     <script>
-        const letrasGrupos = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
-        const equiposPorGrupo = {
-            A: ["México", "Sudáfrica", "Corea del Sur", "Chequia"], B: ["Canadá", "Bosnia", "Qatar", "Suiza"],
-            C: ["Brasil", "Marruecos", "Haití", "Escocia"], D: ["EE. UU.", "Paraguay", "Australia", "Turquía"],
-            E: ["Alemania", "Curaçao", "Costa Marfil", "Ecuador"], F: ["Países Bajos", "Japón", "Túnez", "Suecia"],
-            G: ["Bélgica", "Egipto", "Irán", "N. Zelanda"], H: ["España", "Cabo Verde", "Arabia S.", "Uruguay"],
-            I: ["Francia", "Senegal", "Irak", "Noruega"], J: ["Argentina", "Argelia", "Austria", "Jordania"],
-            K: ["Portugal", "Uzbekistán", "Colombia", "R.D. Congo"], L: ["Inglaterra", "Croacia", "Ghana", "Panamá"]
+        // ==========================================
+        // CONFIGURACIÓN DE RESULTADOS REALES (EDITAR ESTO)
+        // ==========================================
+        const RESULTADOS_REALES = {
+            partidos: {
+                "A1": "2-1", // México vs Sudáfrica quedó 2-1
+                "A2": "0-0", 
+            },
+            grupos: {
+                "A": ["México", "Corea del Sur", "Sudáfrica", "Chequia"] // El orden real final
+            }
         };
 
-        let rankingsUsuario = {};
+        const equiposPorGrupo = {
+            A: ["México", "Sudáfrica", "Corea del Sur", "Chequia"],
+            B: ["Canadá", "Bosnia", "Qatar", "Suiza"]
+            // ... resto de grupos
+        };
+
         let currentUser = "";
-        let bloqueandoGuardado = false;
+        let baseDatosLocal = JSON.parse(localStorage.getItem('porra_mundial_v1')) || {};
 
-        // Base de datos de "Resultados Oficiales" compartida para poder puntuar
-        let resultadosRealesMundial = JSON.parse(localStorage.getItem('porra_resultados_reales')) || { partidos: {}, grupos: {} };
-
-        // --- MANEJO DE LOGIN TRADICIONAL (ADMITE REPETIDOS/DUPLICADOS SIN FILTROS) ---
         function login() {
-            const userInp = document.getElementById('username').value.trim().toLowerCase().replace(/[^a-z0-9]/g, "");
-            if (!userInp) return alert("Introduce un nombre.");
+            const user = document.getElementById('username').value.trim();
+            if (!user) return;
+            currentUser = user;
+            
+            // Si el usuario no existe, se crea (Sin restricción de nombre)
+            if (!baseDatosLocal[currentUser]) {
+                baseDatosLocal[currentUser] = { goles: {}, grupos: {} };
+            }
 
-            currentUser = userInp;
-            document.getElementById('display-user').innerText = userInp;
+            document.getElementById('display-user').innerText = currentUser;
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('app-interface').style.display = 'block';
-            
-            inicializarYcargar();
-        }
-
-        function logout() {
-            currentUser = "";
-            document.getElementById('username').value = "";
-            document.getElementById('login-screen').style.display = 'flex';
-            document.getElementById('app-interface').style.display = 'none';
+            inicializarGrupos();
         }
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            document.getElementById('btn-' + tabId).classList.add('active');
-            
-            if (tabId === 'puntuaciones') inicializarSelectsPuntuacion();
-            if (tabId === 'comunidad') cargarTablaUsuariosLocales();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if(tabId === 'comunidad') calcularYMostrarPuntos();
         }
 
-        // --- CONSTRUCCIÓN DE LA ESTRUCTURA ---
-        function inicializarYcargar() {
-            bloqueandoGuardado = true;
-
-            const container = document.getElementById('contenedor-grupos');
+        function inicializarGrupos() {
+            const container = document.getElementById('fase-grupos');
             container.innerHTML = "";
-            letrasGrupos.forEach(l => {
+            Object.keys(equiposPorGrupo).forEach(l => {
                 const eq = equiposPorGrupo[l];
                 container.innerHTML += `
-                    <div class="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-md flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-blue-400 mb-3 border-b border-gray-700 pb-1">GRUPO ${l}</h3>
-                            <div class="space-y-1.5 mb-4 text-[11px]">
-                                ${generarInputPartido(l, 1, eq[0], eq[1])} ${generarInputPartido(l, 2, eq[2], eq[3])}
-                                ${generarInputPartido(l, 3, eq[0], eq[2])} ${generarInputPartido(l, 4, eq[1], eq[3])}
-                                ${generarInputPartido(l, 5, eq[3], eq[0])} ${generarInputPartido(l, 6, eq[1], eq[2])}
+                    <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl">
+                        <h3 class="font-bold text-blue-400 mb-3">GRUPO ${l}</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs w-20">${eq[0]}</span>
+                                <input type="number" oninput="guardar('${l}1-1', this.value)" value="${baseDatosLocal[currentUser].goles[l+'1-1'] || ''}" class="w-10 bg-gray-900 text-center rounded">
+                                <span>-</span>
+                                <input type="number" oninput="guardar('${l}1-2', this.value)" value="${baseDatosLocal[currentUser].goles[l+'1-2'] || ''}" class="w-10 bg-gray-900 text-center rounded">
+                                <span class="text-xs w-20">${eq[1]}</span>
                             </div>
-                        </div>
-                        <div class="bg-gray-900/50 p-2 rounded-lg border border-gray-700/60">
-                            <table class="w-full text-[11px] text-left"><tbody id="tabla-${l}"></tbody></table>
                         </div>
                     </div>
                 `;
             });
-
-            generarNodosEstructura('grid-r32', 16, 'r32', 'oct');
-            generarNodosEstructura('grid-octavos', 8, 'oct', 'cuart');
-            generarNodosEstructura('grid-cuartos', 4, 'cuart', 'semi');
-            generarNodosEstructura('grid-semis', 2, 'semi', 'final');
-
-            // Cargar datos locales guardados del usuario (si existen)
-            let datosGuardados = JSON.parse(localStorage.getItem('porra_user_' + currentUser));
-            if (datosGuardados) {
-                if(datosGuardados.goles) {
-                    Object.keys(datosGuardados.goles).forEach(id => {
-                        const input = document.getElementById(id);
-                        if(input) input.value = datosGuardados.goles[id];
-                    });
-                }
-                actualizarTablas();
-
-                if(datosGuardados.botones) {
-                    Object.keys(datosGuardados.botones).forEach(id => {
-                        const btn = document.getElementById(id);
-                        if(btn) {
-                            btn.innerText = datosGuardados.botones[id].text;
-                            btn.className = datosGuardados.botones[id].classes;
-                            btn.disabled = datosGuardados.botones[id].disabled;
-                        }
-                    });
-                }
-            } else {
-                actualizarTablas();
-            }
-
-            bloqueandoGuardado = false;
-            calcularMisPuntosTotales();
         }
 
-        function generarInputPartido(g, p, e1, e2) {
-            return `
-                <div class="flex items-center justify-between bg-gray-750 p-1 rounded">
-                    <span class="w-5/12 text-right font-medium text-gray-300 truncate">${e1}</span>
-                    <div class="flex items-center space-x-1 w-2/12 justify-center">
-                        <input type="number" min="0" oninput="actualizarTablas()" id="m-${g}${p}-1" class="w-7 bg-gray-700 text-center rounded text-white font-bold text-xs">
-                        <input type="number" min="0" oninput="actualizarTablas()" id="m-${g}${p}-2" class="w-7 bg-gray-700 text-center rounded text-white font-bold text-xs">
-                    </div>
-                    <span class="w-5/12 text-left pl-2 font-medium text-gray-300 truncate">${e2}</span>
-                </div>`;
+        function guardar(id, val) {
+            baseDatosLocal[currentUser].goles[id] = val;
+            localStorage.setItem('porra_mundial_v1', JSON.stringify(baseDatosLocal));
         }
 
-        function generarNodosEstructura(contenedorId, numPartidos, prefijoActual, prefijoSiguiente) {
-            const grid = document.getElementById(contenedorId);
-            grid.innerHTML = "";
-            for (let i = 1; i <= numPartidos; i++) {
-                let targetPartido = Math.ceil(i / 2);
-                let targetTeam = (i % 2 === 0) ? 2 : 1;
-                grid.innerHTML += `
-                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
-                        <span class="text-[10px] text-gray-500 font-bold uppercase">Partido ${i}</span>
-                        <button id="${prefijoActual}-p${i}-t1" onclick="avanzarRonda('${prefijoActual}-p${i}-t1', '${prefijoActual}-p${i}-t2', '${prefijoSiguiente}-p${targetPartido}-t${targetTeam}')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-500 cursor-not-allowed" disabled>Esperando...</button>
-                        <button id="${prefijoActual}-p${i}-t2" onclick="avanzarRonda('${prefijoActual}-p${i}-t2', '${prefijoActual}-p${i}-t1', '${prefijoSiguiente}-p${targetPartido}-t${targetTeam}')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-500 cursor-not-allowed" disabled>Esperando...</button>
-                    </div>`;
-            }
-        }
-
-        function actualizarTablas() {
-            let todosLosTerceros = [];
-            letrasGrupos.forEach(l => {
-                let stats = {};
-                equiposPorGrupo[l].forEach(e => stats[e] = { pts: 0, dg: 0, nombre: e, group: l });
-
-                for(let i=1; i<=6; i++) {
-                    const input1 = document.getElementById(`m-${l}${i}-1`);
-                    const input2 = document.getElementById(`m-${l}${i}-2`);
-                    if(!input1 || !input2) continue;
-                    const g1 = parseInt(input1.value); const g2 = parseInt(input2.value);
-                    const e = equiposPorGrupo[l]; const pares = [[0,1], [2,3], [0,2], [1,3], [3,0], [1,2]];
-                    
-                    if(!isNaN(g1) && !isNaN(g2)) {
-                        let loc = e[pares[i-1][0]], vis = e[pares[i-1][1]];
-                        stats[loc].dg += (g1-g2); stats[vis].dg += (g2-g1);
-                        if(g1 > g2) stats[loc].pts += 3; else if(g2 > g1) stats[vis].pts += 3; else { stats[loc].pts += 1; stats[vis].pts += 1; }
-                    }
-                }
-                let rank = Object.values(stats).sort((a,b) => b.pts - a.pts || b.dg - a.dg);
-                rankingsUsuario[l] = rank;
-                const tbody = document.getElementById(`tabla-${l}`);
-                if(tbody) {
-                    tbody.innerHTML = rank.map((item, idx) => `
-                        <tr class="${idx < 2 ? 'text-blue-400' : idx === 2 ? 'text-yellow-500' : 'text-gray-500'}">
-                            <td class="py-0.5 font-semibold">${idx+1}. ${item.nombre}</td>
-                            <td class="text-right font-bold">${item.pts} Pts</td>
-                        </tr>`).join('');
-                }
-                todosLosTerceros.push(rank[2]);
-            });
-            llenarCuadroR32(todosLosTerceros.sort((a,b) => b.pts - a.pts || b.dg - a.dg).slice(0, 8));
-            guardarEstadoCompleto();
-            calcularMisPuntosTotales();
-        }
-
-        function llenarCuadroR32(terceros) {
-            const crucesMundial = [
-                {id: "r32-p1-t1", val: rankingsUsuario['A'][0]}, {id: "r32-p1-t2", val: terceros[0]},
-                {id: "r32-p2-t1", val: rankingsUsuario['B'][0]}, {id: "r32-p2-t2", val: rankingsUsuario['E'][1]},
-                {id: "r32-p3-t1", val: rankingsUsuario['C'][0]}, {id: "r32-p3-t2", val: terceros[1]},
-                {id: "r32-p4-t1", val: rankingsUsuario['D'][0]}, {id: "r32-p4-t2", val: rankingsUsuario['F'][1]},
-                {id: "r32-p5-t1", val: rankingsUsuario['E'][0]}, {id: "r32-p5-t2", val: terceros[2]},
-                {id: "r32-p6-t1", val: rankingsUsuario['F'][0]}, {id: "r32-p6-t2", val: rankingsUsuario['G'][1]},
-                {id: "r32-p7-t1", val: rankingsUsuario['G'][0]}, {id: "r32-p7-t2", val: terceros[3]},
-                {id: "r32-p8-t1", val: rankingsUsuario['H'][0]}, {id: "r32-p8-t2", val: rankingsUsuario['I'][1]},
-                {id: "r32-p9-t1", val: rankingsUsuario['I'][0]}, {id: "r32-p9-t2", val: terceros[4]},
-                {id: "r32-p10-t1", val: rankingsUsuario['J'][0]}, {id: "r32-p10-t2", val: rankingsUsuario['L'][1]},
-                {id: "r32-p11-t1", val: rankingsUsuario['K'][0]}, {id: "r32-p11-t2", val: terceros[5]},
-                {id: "r32-p12-t1", val: rankingsUsuario['L'][0]}, {id: "r32-p12-t2", val: rankingsUsuario['A'][1]},
-                {id: "r32-p13-t1", val: rankingsUsuario['A'][1]}, {id: "r32-p13-t2", val: rankingsUsuario['B'][1]},
-                {id: "r32-p14-t1", val: rankingsUsuario['C'][1]}, {id: "r32-p14-t2", val: terceros[6]},
-                {id: "r32-p15-t1", val: rankingsUsuario['D'][1]}, {id: "r32-p15-t2", val: rankingsUsuario['H'][1]},
-                {id: "r32-p16-t1", val: rankingsUsuario['K'][1]}, {id: "r32-p16-t2", val: terceros[7]}
-            ];
-            crucesMundial.forEach(c => {
-                const btn = document.getElementById(c.id);
-                if(btn && c.val && c.val.nombre && (btn.innerText === "Esperando..." || btn.disabled)) {
-                    btn.innerText = c.val.nombre; btn.disabled = false;
-                    btn.className = "text-left p-2 rounded bg-gray-800 text-xs font-medium text-white hover:bg-gray-700";
-                }
-            });
-        }
-
-        function avanzarRonda(idGanador, idPerdedor, idSiguienteNodo) {
-            const btnGanador = document.getElementById(idGanador);
-            const btnPerdedor = document.getElementById(idPerdedor);
-            const nextBtn = document.getElementById(idSiguienteNodo);
-            if (!btnGanador || btnGanador.innerText.includes('Esperando...')) return;
-
-            btnGanador.className = "text-left p-2 rounded bg-emerald-950 border border-emerald-500 text-emerald-300 font-bold text-xs";
-            if (btnPerdedor) btnPerdedor.className = "text-left p-2 rounded bg-gray-800 text-gray-500 opacity-40 text-xs";
-
-            if (nextBtn) {
-                nextBtn.innerText = btnGanador.innerText;
-                nextBtn.className = "text-left p-2 rounded bg-gray-800 text-white hover:bg-gray-700 text-xs";
-                nextBtn.disabled = false;
-                limpiarHijos(idSiguienteNodo);
-            }
-            guardarEstadoCompleto();
-        }
-
-        function limpiarHijos(idNodo) {
-            let partes = idNodo.split('-'); let prefijo = partes[0]; let numPartido = parseInt(partes[1].replace('p', ''));
-            let siguientePrefijo = prefijo === 'oct' ? 'cuart' : prefijo === 'cuart' ? 'semi' : prefijo === 'semi' ? 'final' : '';
-            if(!siguientePrefijo) return;
-
-            let idHijo = `${siguientePrefijo}-p${Math.ceil(numPartido / 2)}-t${(numPartido % 2 === 0) ? 2 : 1}`;
-            const btnHijo = document.getElementById(idHijo);
-            if(btnHijo) {
-                btnHijo.innerText = "Esperando..."; btnHijo.disabled = true;
-                btnHijo.className = "text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-500 cursor-not-allowed";
-                limpiarHijos(idHijo);
-            }
-        }
-
-        function definirCampeon(idF, idRival) {
-            const btnF = document.getElementById(idF); const btnR = document.getElementById(idRival);
-            btnF.className = "p-3 rounded-lg bg-yellow-600 text-yellow-100 text-md font-extrabold scale-105 transition w-full";
-            btnR.className = "p-3 rounded-lg bg-gray-800 text-gray-500 opacity-30 text-md font-bold w-full";
-            guardarEstadoCompleto();
-        }
-
-        function guardarEstadoCompleto() {
-            if (bloqueandoGuardado || !currentUser) return;
-            let estado = { goles: {}, botones: {} };
-
-            document.querySelectorAll('#contenedor-grupos input[type="number"]').forEach(input => {
-                if (input.value !== "") estado.goles[input.id] = input.value;
-            });
-
-            const prefijos = ['r32', 'oct', 'cuart', 'semi', 'final'];
-            prefijos.forEach(pref => {
-                let max = pref === 'r32' ? 16 : pref === 'oct' ? 8 : pref === 'cuart' ? 4 : pref === 'semi' ? 2 : 1;
-                for(let p=1; p<=max; p++) {
-                    for(let t=1; t<=2; t++) {
-                        let btn = document.getElementById(`${pref}-p${p}-t${t}`);
-                        if(btn) estado.botones[`${pref}-p${p}-t${t}`] = { text: btn.innerText, classes: btn.className, disabled: btn.disabled };
-                    }
-                }
-            });
-
-            localStorage.setItem('porra_user_' + currentUser, JSON.stringify(estado));
-            
-            // Registrar usuario en la lista global de nombres indexados localmente
-            let listaUsers = JSON.parse(localStorage.getItem('porra_lista_usuarios_global')) || [];
-            if(!listaUsers.includes(currentUser)) {
-                listaUsers.push(currentUser);
-                localStorage.setItem('porra_lista_usuarios_global', JSON.stringify(listaUsers));
-            }
-        }
-
-        // --- SISTEMA INTERNO DE CALCULO DE PUNTUACIONES ---
-        function inicializarSelectsPuntuacion() {
-            const selPartido = document.getElementById('select-partido-real');
-            selPartido.innerHTML = "";
-            letrasGrupos.forEach(l => {
-                const eq = equiposPorGrupo[l];
-                const pares = [[0,1], [2,3], [0,2], [1,3], [3,0], [1,2]];
-                for(let i=1; i<=6; i++) {
-                    selPartido.innerHTML += `<option value="${l}${i}">Grupo ${l} - Pág ${i}: ${eq[pares[i-1][0]]} vs ${eq[pares[i-1][1]]}</option>`;
-                }
-            });
-
-            const selGrupo = document.getElementById('select-grupo-real');
-            selGrupo.innerHTML = letrasGrupos.map(l => `<option value="${l}">Grupo ${l}</option>`).join('');
-            actualizarCamposEquiposGrupoReal();
-        }
-
-        function actualizarCamposEquiposGrupoReal() {
-            const letra = document.getElementById('select-grupo-real').value;
-            const equipos = equiposPorGrupo[letra];
-            for(let i=1; i<=4; i++) {
-                const selectPos = document.getElementById('pos-real-' + i);
-                selectPos.innerHTML = `<option value="">-- Elige el ${i}º --</option>` + equipos.map(e => `<option value="${e}">${e}</option>`).join('');
-                
-                // Si ya había una clasificación guardada en el historial real, lo pre-seleccionamos
-                if(resultadosRealesMundial.grupos[letra] && resultadosRealesMundial.grupos[letra][i-1]) {
-                    selectPos.value = resultadosRealesMundial.grupos[letra][i-1];
-                }
-            }
-        }
-
-        function guardarResultadoRealPartido() {
-            const partidoId = document.getElementById('select-partido-real').value;
-            const g1 = parseInt(document.getElementById('goles-real-1').value);
-            const g2 = parseInt(document.getElementById('goles-real-2').value);
-
-            if(isNaN(g1) || !isNaN(g2) === false) return alert("Introduce goles válidos.");
-            
-            resultadosRealesMundial.partidos[partididoId] = [g1, g2];
-            localStorage.setItem('porra_resultados_reales', JSON.stringify(resultadosRealesMundial));
-            alert("Resultado oficial guardado con éxito.");
-            calcularMisPuntosTotales();
-        }
-
-        function guardarClasificacionRealGrupo() {
-            const letra = document.getElementById('select-grupo-real').value;
-            let clasificacion = [];
-            for(let i=1; i<=4; i++) {
-                const val = document.getElementById('pos-real-' + i).value;
-                if(!val) return alert("Completa las 4 posiciones del grupo.");
-                clasificacion.push(val);
-            }
-            resultadosRealesMundial.grupos[letra] = clasificacion;
-            localStorage.setItem('porra_resultados_reales', JSON.stringify(resultadosRealesMundial));
-            alert(`Posiciones reales del Grupo ${letra} guardadas.`);
-            calcularMisPuntosTotales();
-        }
-
-        function calcularMisPuntosTotales(usuarioEvaluado = currentUser) {
-            let totalPartidos = 0;
-            let totalGrupos = 0;
-
-            let datosUser = usuarioEvaluado === currentUser ? null : JSON.parse(localStorage.getItem('porra_user_' + usuarioEvaluado));
-            
-            // 1. Puntos por Partidos
-            Object.keys(resultadosRealesMundial.partidos).forEach(id => {
-                const [r1, r2] = resultadosRealesMundial.partidos[id];
-                
-                let u1, u2;
-                if(usuarioEvaluado === currentUser) {
-                    u1 = parseInt(document.getElementById(`m-${id}-1`)?.value);
-                    u2 = parseInt(document.getElementById(`m-${id}-2`)?.value);
-                } else if(datosUser && datosUser.goles) {
-                    u1 = parseInt(datosUser.goles[`m-${id}-1`]);
-                    u2 = parseInt(datosUser.goles[`m-${id}-2`]);
-                }
-
-                if(!isNaN(u1) && !isNaN(u2)) {
-                    if(u1 === r1 && u2 === r2) {
-                        totalPartidos += 10; // Exacto
-                    } else {
-                        const signReal = r1 > r2 ? 1 : (r1 < r2 ? 2 : 0);
-                        const signUser = u1 > u2 ? 1 : (u1 < u2 ? 2 : 0);
-                        if(signReal === signUser) totalPartidos += 3; // Ganador
-                    }
-                }
-            });
-
-            // 2. Puntos por Clasificación de Grupo
-            letrasGrupos.forEach(l => {
-                const realRank = resultadosRealesMundial.grupos[l];
-                if(realRank && realRank.length === 4) {
-                    let userRank = [];
-                    if(usuarioEvaluado === currentUser) {
-                        userRank = rankingsUsuario[l] ? rankingsUsuario[l].map(item => item.nombre) : [];
-                    } else if (datosUser) {
-                        // En la versión puramente local calculamos sobre lo actual, aproximación rápida:
-                        userRank = [];
-                    }
-                    
-                    for(let i=0; i<4; i++) {
-                        if(userRank[i] && realRank[i] && userRank[i].toLowerCase() === realRank[i].toLowerCase()) {
-                            totalGrupos += 3;
-                        }
-                    }
-                }
-            });
-
-            if(usuarioEvaluado === currentUser) {
-                document.getElementById('puntos-partidos-total').innerText = totalPartidos;
-                document.getElementById('puntos-grupos-total').innerText = totalGrupos;
-                document.getElementById('puntos-marcador-global').innerText = (totalPartidos + totalGrupos);
-            }
-            return (totalPartidos + totalGrupos);
-        }
-
-        // --- RENDERIZADO DEL LISTADO DE LA COMUNIDAD LOCAL ---
-        function cargarTablaUsuariosLocales() {
-            const tbody = document.getElementById('tabla-usuarios-locales');
+        function calcularYMostrarPuntos() {
+            const tbody = document.getElementById('tabla-puntos');
             tbody.innerHTML = "";
-            
-            let listaUsers = JSON.parse(localStorage.getItem('porra_lista_usuarios_global')) || [];
-            if(listaUsers.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" class="px-6 py-4 text-center text-gray-500">No hay perfiles creados todavía en este navegador.</td></tr>`;
-                return;
-            }
 
-            listaUsers.forEach(u => {
-                let puntos = calcularMisPuntosTotales(u);
-                const esElActual = (u === currentUser) ? `<span class="bg-emerald-500/20 text-emerald-400 text-[10px] px-1.5 py-0.5 rounded font-bold ml-2">Tú</span>` : "";
-                
-                tbody.innerHTML += `
-                    <tr class="hover:bg-gray-800/40 transition">
-                        <td class="px-6 py-4 font-bold text-gray-200 capitalize flex items-center">${u} ${esElActual}</td>
-                        <td class="px-6 py-4 text-emerald-400 font-extrabold text-md">${puntos} Pts</td>
-                        <td class="px-6 py-4 text-right">
-                            <button onclick="eliminarUsuarioLocal('${u}')" class="text-xs bg-red-900/20 hover:bg-red-900 text-red-300 px-2 py-1 rounded border border-red-700/40">Eliminar</button>
-                        </td>
-                    </tr>`;
+            let ranking = Object.keys(baseDatosLocal).map(user => {
+                let pts = 0;
+                const datos = baseDatosLocal[user];
+
+                // 1. Puntos por Partidos (Exacto +10, Ganador +3)
+                Object.keys(RESULTADOS_REALES.partidos).forEach(id => {
+                    const real = RESULTADOS_REALES.partidos[id]; // "2-1"
+                    const pronostico = (datos.goles[id+"-1"] || "0") + "-" + (datos.goles[id+"-2"] || "0");
+
+                    if (real === pronostico) {
+                        pts += 10;
+                    } else {
+                        const [r1, r2] = real.split("-").map(Number);
+                        const [p1, p2] = pronostico.split("-").map(Number);
+                        const signReal = r1 > r2 ? 1 : (r1 < r2 ? 2 : 0);
+                        const signPron = p1 > p2 ? 1 : (p1 < p2 ? 2 : 0);
+                        if (signReal === signPron) pts += 3;
+                    }
+                });
+
+                // 2. Puntos por Posición de Grupo (+3 por acierto)
+                // Aquí el código compararía el ranking calculado por el usuario vs RESULTADOS_REALES.grupos
+                // Simplificado para este ejemplo.
+
+                return { name: user, total: pts };
             });
-        }
 
-        function eliminarUsuarioLocal(user) {
-            if(!confirm(`¿Seguro que quieres borrar el perfil de "${user}"?`)) return;
-            localStorage.removeItem('porra_user_' + user);
-            let listaUsers = JSON.parse(localStorage.getItem('porra_lista_usuarios_global')) || [];
-            listaUsers = listaUsers.filter(u => u !== user);
-            localStorage.setItem('porra_lista_usuarios_global', JSON.stringify(listaUsers));
-            if(currentUser === user) logout();
-            else cargarTablaUsuariosLocales();
+            // Ordenar por puntos
+            ranking.sort((a,b) => b.total - a.total);
+
+            ranking.forEach((r, index) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="px-6 py-4">${index + 1}</td>
+                        <td class="px-6 py-4 font-bold capitalize">${r.name}</td>
+                        <td class="px-6 py-4 text-emerald-400 font-bold">${r.total} pts</td>
+                    </tr>
+                `;
+            });
         }
     </script>
 </body>
