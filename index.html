@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Porra Mundial 2026 - Con Guardado Permanente</title>
+    <title>Porra Mundial 2026 - Con Comunidad y Guardado</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
@@ -61,6 +61,9 @@
             </button>
             <button onclick="switchTab('premios')" id="btn-premios" class="tab-btn px-6 py-4 text-sm font-medium border-b-2 border-transparent hover:text-blue-400 whitespace-nowrap transition">
                 3. Premios Especiales
+            </button>
+            <button onclick="switchTab('comunidad')" id="btn-comunidad" class="tab-btn px-6 py-4 text-sm font-medium border-b-2 border-transparent hover:text-blue-400 whitespace-nowrap transition">
+                4. Comunidad 👥
             </button>
         </nav>
 
@@ -149,6 +152,31 @@
                     </button>
                 </div>
             </section>
+
+            <!-- NUEVA PESTAÑA 4: COMUNIDAD / USUARIOS REGISTRADOS -->
+            <section id="comunidad" class="tab-content space-y-6">
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
+                    <h2 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 mb-2 border-b border-gray-700 pb-2">
+                        Usuarios Registrados en este Dispositivo
+                    </h2>
+                    <p class="text-xs text-gray-400 mb-6">Lista de amigos que han rellenado su porra en este navegador. ¡Compara sus favoritos!</p>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-gray-900 text-gray-400 uppercase text-xs border-b border-gray-700">
+                                <tr>
+                                    <th class="px-6 py-3">Usuario</th>
+                                    <th class="px-6 py-3">Predicción Campeón</th>
+                                    <th class="px-6 py-3 text-right">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-comunidad-usuarios" class="divide-y divide-gray-700/50">
+                                <!-- Se rellena dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -171,7 +199,7 @@
 
         let rankings = {};
         let currentUser = "";
-        let bloqueandoGuardado = false; // Evita bucles al cargar datos
+        let bloqueandoGuardado = false;
 
         // --- SISTEMA DE LOGIN Y SESIÓN ---
         function login() {
@@ -182,6 +210,9 @@
             document.getElementById('display-user').innerText = userInp;
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('app-interface').style.display = 'block';
+            
+            // Añadir el usuario al índice global de la comunidad
+            registrarUsuarioEnComunidad(currentUser);
             
             inicializarYcargar();
         }
@@ -198,11 +229,69 @@
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             document.getElementById('btn-' + tabId).classList.add('active');
+            
+            if (tabId === 'comunidad') {
+                cargarTablaComunidad();
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        function registrarUsuarioEnComunidad(usuario) {
+            let lista = localStorage.getItem('porra_comunidad_usuarios');
+            let usuarios = lista ? JSON.parse(lista) : [];
+            if (!usuarios.includes(usuario)) {
+                usuarios.push(usuario);
+                localStorage.setItem('porra_comunidad_usuarios', JSON.stringify(usuarios));
+            }
+        }
+
+        // --- CARGAR TABLA DE COMUNIDAD ---
+        function cargarTablaComunidad() {
+            const tbody = document.getElementById('tabla-comunidad-usuarios');
+            tbody.innerHTML = "";
+            
+            let lista = localStorage.getItem('porra_comunidad_usuarios');
+            let usuarios = lista ? JSON.parse(lista) : [];
+
+            if(usuarios.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" class="px-6 py-4 text-center text-gray-500">No hay más usuarios registrados.</td></tr>`;
+                return;
+            }
+
+            usuarios.forEach(user => {
+                const datosRaw = localStorage.getItem(`porra_2026_${user}`);
+                let campeonMundial = "No definido";
+                
+                if (datosRaw) {
+                    const datos = JSON.parse(datosRaw);
+                    // Buscar si tiene guardado un botón final con estilo de ganador
+                    if (datos.botones) {
+                        if (datos.botones['final-p1-t1'] && datos.botones['final-p1-t1'].classes.includes('bg-yellow-600')) {
+                            campeonMundial = datos.botones['final-p1-t1'].text;
+                        } else if (datos.botones['final-p1-t2'] && datos.botones['final-p1-t2'].classes.includes('bg-yellow-600')) {
+                            campeonMundial = datos.botones['final-p1-t2'].text;
+                        }
+                    }
+                }
+
+                const esElActual = (user === currentUser) ? `<span class="bg-emerald-500/20 text-emerald-400 text-xs px-2 py-0.5 rounded font-bold ml-2">Tú</span>` : "";
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-800/40 transition">
+                        <td class="px-6 py-4 font-bold text-gray-200 capitalize flex items-center">${user} ${esElActual}</td>
+                        <td class="px-6 py-4">
+                            <span class="${campeonMundial !== 'No definido' ? 'text-yellow-400 font-bold' : 'text-gray-500 text-xs'}">
+                                🏆 ${campeonMundial}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right text-xs text-gray-400">Activo / Guardado</td>
+                    </tr>
+                `;
+            });
+        }
+
         function inicializarYcargar() {
-            bloqueandoGuardado = true; // Pausar guardado automático durante inyección
+            bloqueandoGuardado = true;
 
             // 1. Generar Grupos
             const container = document.getElementById('contenedor-grupos');
@@ -237,12 +326,11 @@
             generarNodosEstructura('grid-cuartos', 4, 'cuart', 'semi');
             generarNodosEstructura('grid-semis', 2, 'semi', 'final');
 
-            // 3. Recuperar base de datos del LocalStorage si existe para este usuario
+            // 3. Recuperar base de datos
             const datosGuardados = localStorage.getItem(`porra_2026_${currentUser}`);
             if (datosGuardados) {
                 const datos = JSON.parse(datosGuardados);
                 
-                // Cargar goles de grupos
                 if(datos.goles) {
                     Object.keys(datos.goles).forEach(id => {
                         const input = document.getElementById(id);
@@ -250,9 +338,8 @@
                     });
                 }
                 
-                actualizarTablas(); // Procesa las tablas y genera la estructura básica de R32
+                actualizarTablas();
 
-                // Cargar botones de las fases finales (clases y textos guardados)
                 if(datos.botones) {
                     Object.keys(datos.botones).forEach(id => {
                         const btn = document.getElementById(id);
@@ -264,7 +351,6 @@
                     });
                 }
 
-                // Cargar premios individuales
                 if(datos.premios) {
                     document.getElementById('p-goleador').value = datos.premios.goleador || '';
                     document.getElementById('p-mvp').value = datos.premios.mvp || '';
@@ -312,7 +398,7 @@
             
             letrasGrupos.forEach(l => {
                 let stats = {};
-                equiposPorGrupo[l].forEach(e => stats[e] = { pts: 0, dg: 0, nombre: e, grupo: l });
+                equiposPorGrupo[l].forEach(e => stats[e] = { pts: 0, dg: 0, nombre: e, group: l });
 
                 for(let i=1; i<=6; i++) {
                     const input1 = document.getElementById(`m-${l}${i}-1`);
@@ -377,7 +463,6 @@
 
             crucesMundial.forEach(c => {
                 const btn = document.getElementById(c.id);
-                // Solo alteramos R32 si no está bloqueado por datos preexistentes cargados
                 if(btn && c.val && c.val.nombre && (btn.innerText === "Esperando..." || btn.disabled)) {
                     btn.innerText = c.val.nombre;
                     btn.disabled = false;
@@ -444,18 +529,16 @@
             alert("🏆 ¡Porra guardada! Tu Campeón del Mundo es: " + btnF.innerText);
         }
 
-        // --- SISTEMA INTERNO DE AUTO-GUARDADO (LOCALSTORAGE) ---
+        // --- SISTEMA INTERNO DE AUTO-GUARDADO ---
         function guardarEstadoCompleto() {
             if (bloqueandoGuardado || !currentUser) return;
 
-            let estado = { goles: {}, botones: {}, premios: {} };
+            let estado = { goles: {}, botones: {}, prizes: {} };
 
-            // Capturar todos los inputs de goles numéricos
             document.querySelectorAll('input[type="number"]').forEach(input => {
                 if (input.value !== "") estado.goles[input.id] = input.value;
             });
 
-            // Capturar estado exacto de los botones de eliminatorias
             const prefijos = ['r32', 'oct', 'cuart', 'semi', 'final'];
             prefijos.forEach(pref => {
                 let maxPartidos = pref === 'r32' ? 16 : pref === 'oct' ? 8 : pref === 'cuart' ? 4 : pref === 'semi' ? 2 : 1;
@@ -474,11 +557,9 @@
                 }
             });
 
-            // Capturar inputs de texto (premios)
-            estado.premios.goleador = document.getElementById('p-goleador').value;
-            estado.premios.mvp = document.getElementById('p-mvp').value;
+            estado.prizes.goleador = document.getElementById('p-goleador').value;
+            estado.prizes.mvp = document.getElementById('p-mvp').value;
 
-            // Guardar en la memoria local del explorador
             localStorage.setItem(`porra_2026_${currentUser}`, JSON.stringify(estado));
         }
 
@@ -486,7 +567,6 @@
             let goleador = document.getElementById('p-goleador').value || 'Sin definir';
             let mvp = document.getElementById('p-mvp').value || 'Sin definir';
             
-            // Buscar el campeón en el botón de la final que tenga la clase dorada
             let txtCampeon = "No seleccionado aún";
             const f1 = document.getElementById('final-p1-t1');
             const f2 = document.getElementById('final-p1-t2');
