@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porra Mundial - nenegda</title>
+    <!-- Tailwind CSS para una interfaz limpia y moderna -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .tab-btn.active { border-bottom-2px: solid #3b82f6; color: #3b82f6; font-weight: bold; }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans min-h-screen pb-12">
+
+    <!-- HEADER -->
+    <header class="bg-gray-800 border-b border-gray-700 p-6 text-center shadow-lg">
+        <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
+            PORRA MUNDIAL
+        </h1>
+        <p class="text-gray-400 text-sm mt-1">Organizado por @nenegda</p>
+    </header>
+
+    <!-- NAVEGACIÓN POR PESTAÑAS -->
+    <nav class="flex justify-center bg-gray-800 border-b border-gray-700 sticky top-0 z-50">
+        <button onclick="switchTab('fase-grupos')" id="btn-fase-grupos" class="tab-btn active px-6 py-4 text-sm font-medium border-b-2 border-transparent hover:text-blue-400 transition">
+            1. Fase de Grupos
+        </button>
+        <button onclick="switchTab('cruces')" id="btn-cruces" class="tab-btn px-6 py-4 text-sm font-medium border-b-2 border-transparent hover:text-blue-400 transition">
+            2. Eliminatorias
+        </button>
+        <button onclick="switchTab('premios')" id="btn-premios" class="tab-btn px-6 py-4 text-sm font-medium border-b-2 border-transparent hover:text-blue-400 transition">
+            3. Premios Individuales
+        </button>
+    </nav>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="max-w-4xl mx-auto mt-8 px-4">
+
+        <!-- PESTAÑA 1: FASE DE GRUPOS -->
+        <section id="fase-grupos" class="tab-content active space-y-8">
+            <div class="bg-blue-900/30 border border-blue-500/30 p-4 rounded-xl text-sm text-blue-300 mb-6">
+                💡 Introduce los resultados de la fase de grupos. Los clasificados se calcularán automáticamente para la siguiente pestaña.
+            </div>
+
+            <!-- GRUPO A -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
+                <h2 class="text-xl font-bold text-blue-400 mb-4 border-b border-gray-700 pb-2">GRUPO A</h2>
+                <div class="space-y-4">
+                    <!-- Partido 1 -->
+                    <div class="flex items-center justify-between bg-gray-750 p-3 rounded-lg">
+                        <div class="w-2/5 text-right font-medium pr-4">Países Bajos</div>
+                        <div class="flex items-center space-x-2 justify-center w-1/5">
+                            <input type="number" min="0" id="g-p1-l" onchange="calcularClasificados()" class="w-12 bg-gray-700 text-center rounded py-1 font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <span class="text-gray-500">-</span>
+                            <input type="number" min="0" id="g-p1-v" onchange="calcularClasificados()" class="w-12 bg-gray-700 text-center rounded py-1 font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="w-2/5 text-left font-medium pl-4">Ecuador</div>
+                    </div>
+                    <!-- Partido 2 -->
+                    <div class="flex items-center justify-between bg-gray-750 p-3 rounded-lg">
+                        <div class="w-2/5 text-right font-medium pr-4">Senegal</div>
+                        <div class="flex items-center space-x-2 justify-center w-1/5">
+                            <input type="number" min="0" id="g-p2-l" onchange="calcularClasificados()" class="w-12 bg-gray-700 text-center rounded py-1 font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <span class="text-gray-500">-</span>
+                            <input type="number" min="0" id="g-p2-v" onchange="calcularClasificados()" class="w-12 bg-gray-700 text-center rounded py-1 font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="w-2/5 text-left font-medium pl-4">Catar</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRUPO B -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
+                <h2 class="text-xl font-bold text-emerald-400 mb-4 border-b border-gray-700 pb-2">GRUPO B</h2>
+                <div class="space-y-4">
+                    <!-- Partido 1 -->
+                    <div class="flex items-center justify-between bg-gray-750 p-3 rounded-lg">
+                        <div class="w-2/5 text-right font-medium pr-4">Inglaterra</div>
+                        <div class="flex items-center space-x-2 justify-center w-1/5">
+                            <input type="number" min="0" id="g-p3-l" onchange="calcularClasificados()" class="w-12 bg-gray-700 text-center rounded py-1 font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <span class="text-gray-500">-</span>
+                            <input type="number" min="0" id="g-p3-v" onchange="calcularClasificados()" class="w-12 bg-gray-700 text-center rounded py-1 font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="w-2/5 text-left font-medium pl-4">EE. UU.</div>
+                    </div>
+                    <!-- Partido 2 -->
+                    <div class="flex items-center justify-between bg-gray-750 p-3 rounded-lg">
+                        <div class="w-2/5 text-right font-medium pr-4">Gales</div>
+                        <div class="flex items-center space-x-2 justify-center w-1/5">
+                            <input type="number" min="0" id="g-p4-l" onchange="calcularClasificados()" class="w-12 bg-gray-700 text-center rounded py-1 font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <span class="text-gray-500">-</span>
+                            <input type="number" min="0" id="g-p4-v" onchange="calcularClasificados()" class="w-12 bg-gray-700 text-center rounded py-1 font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="w-2/5 text-left font-medium pl-4">Irán</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center pt-4">
+                <button onclick="switchTab('cruces')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition">
+                    Siguiente: Elegir Cruces →
+                </button>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 2: ELIMINATORIAS (CRUCES AUTOMÁTICOS) -->
+        <section id="cruces" class="tab-content space-y-8">
+            <div class="bg-emerald-900/30 border border-emerald-500/30 p-4 rounded-xl text-sm text-emerald-300 mb-6">
+                ⚡ ¡Cruces generados! Haz clic sobre el equipo que crees que **ganará** la eliminatoria (se marcará en verde).
+            </div>
+
+            <!-- OCTAVOS DE FINAL -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
+                <h2 class="text-xl font-bold text-amber-400 mb-6 border-b border-gray-700 pb-2">Octavos de Final</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Cruce 1: 1A vs 2B -->
+                    <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex flex-col space-y-2">
+                        <span class="text-xs text-gray-500 font-bold tracking-wider">OCTAVOS 1</span>
+                        <button id="c1-t1" onclick="seleccionarGanador('c1', 't1', 'c1-t2', 'cuartos1-1')" class="w-full text-left p-3 rounded-lg bg-gray-800 hover:bg-gray-700 border border-transparent transition font-medium">
+                            1º Grupo A: <span id="txt-1a">Por decidir</span>
+                        </button>
+                        <div class="text-center text-xs text-gray-600 font-bold">VS</div>
+                        <button id="c1-t2" onclick="seleccionarGanador('c1', 't2', 'c1-t1', 'cuartos1-1')" class="w-full text-left p-3 rounded-lg bg-gray-800 hover:bg-gray-700 border border-transparent transition font-medium">
+                            2º Grupo B: <span id="txt-2b">Por decidir</span>
+                        </button>
+                    </div>
+
+                    <!-- Cruce 2: 1B vs 2A -->
+                    <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex flex-col space-y-2">
+                        <span class="text-xs text-gray-500 font-bold tracking-wider">OCTAVOS 2</span>
+                        <button id="c2-t1" onclick="seleccionarGanador('c2', 't1', 'c2-t2', 'cuartos1-2')" class="w-full text-left p-3 rounded-lg bg-gray-800 hover:bg-gray-700 border border-transparent transition font-medium">
+                            1º Grupo B: <span id="txt-1b">Por decidir</span>
+                        </button>
+                        <div class="text-center text-xs text-gray-600 font-bold">VS</div>
+                        <button id="c2-t2" onclick="seleccionarGanador('c2', 't2', 'c2-t1', 'cuartos1-2')" class="w-full text-left p-3 rounded-lg bg-gray-800 hover:bg-gray-700 border border-transparent transition font-medium">
+                            2º Grupo A: <span id="txt-2a">Por decidir</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CUARTOS DE FINAL -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
+                <h2 class="text-xl font-bold text-amber-500 mb-6 border-b border-gray-700 pb-2">Cuartos de Final</h2>
+                <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex flex-col space-y-2 max-w-md mx-auto">
+                    <span class="text-xs text-gray-500 font-bold tracking-wider">CUARTOS 1</span>
+                    <button id="cuartos1-1" class="w-full text-left p-3 rounded-lg bg-gray-800 border border-transparent font-medium cursor-not-allowed text-gray-500" disabled>
+                        Ganador Octavos 1
+                    </button>
+                    <div class="text-center text-xs text-gray-600 font-bold">VS</div>
+                    <button id="cuartos1-2" class="w-full text-left p-3 rounded-lg bg-gray-800 border border-transparent font-medium cursor-not-allowed text-gray-500" disabled>
+                        Ganador Octavos 2
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center pt-4">
+                <button onclick="switchTab('premios')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition">
+                    Siguiente: Premios Individuales →
+                </button>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 3: PREMIOS INDIVIDUALES Y ENVIAR -->
+        <section id="premios" class="tab-content space-y-8">
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
+                <h2 class="text-xl font-bold text-purple-400 mb-6 border-b border-gray-700 pb-2">Premios Individuales</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">⚽ Máximo Goleador</label>
+                        <input type="text" id="p-goleador" placeholder="Ej. Kylian Mbappé" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">⭐ Mejor Jugador (MVP)</label>
+                        <input type="text" id="p-mvp" placeholder="Ej. Lionel Messi" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">👶 Mejor Jugador Joven</label>
+                        <input type="text" id="p-joven" placeholder="Ej. Lamine Yamal" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">🧤 Mejor Portero</label>
+                        <input type="text" id="p-portero" placeholder="Ej. Dibu Martínez" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTÓN DE GUARDAR / EXPORTAR -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md text-center">
+                <h3 class="text-lg font-bold mb-2">¡Termina tu Porra!</h3>
+                <p class="text-gray-400 text-sm mb-4">Haz clic abajo para copiar tus predicciones en formato texto y enviárselas al administrador.</p>
+                <button onclick="exportarPorra()" class="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-bold py-3 px-10 rounded-xl shadow-lg transition transform hover:scale-105">
+                    Copiar Predicciones 📋
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- LÓGICA EN JAVASCRIPT -->
+    <script>
+        // Control de pestañas
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('btn-' + tabId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Lógica de cálculo automático simulada (puedes ampliarla a todos los grupos que quieras)
+        function calcularClasificados() {
+            // GRUPO A
+            let g1l = parseInt(document.getElementById('g-p1-l').value) || 0;
+            let g1v = parseInt(document.getElementById('g-p1-v').value) || 0;
+            let g2l = parseInt(document.getElementById('g-p2-l').value) || 0;
+            let g2v = parseInt(document.getElementById('g-p2-v').value) || 0;
+
+            // Simulación simple para el ejemplo: el que mete más goles clasifica
+            let 1a = "Países Bajos", 2a = "Ecuador";
+            if(g1v > g1l) { 1a = "Ecuador"; 2a = "Países Bajos"; }
+            if(g2l > g2v && g1v <= g1l) { 2a = "Senegal"; }
+
+            document.getElementById('txt-1a').innerText = 1a;
+            document.getElementById('txt-2a').innerText = 2a;
+
+            // GRUPO B
+            let g3l = parseInt(document.getElementById('g-p3-l').value) || 0;
+            let g3v = parseInt(document.getElementById('g-p3-v').value) || 0;
+
+            let 1b = "Inglaterra", 2b = "EE. UU.";
+            if(g3v > g3l) { 1b = "EE. UU."; 2b = "Inglaterra"; }
+
+            document.getElementById('txt-1b').innerText = 1b;
+            document.getElementById('txt-2b').innerText = 2b;
+        }
+
+        // Selección de ganadores por clic (sin meter goles)
+        let ganadores = {};
+        function seleccionarGanador(cruceId, elegido, rival, siguienteNodoId) {
+            // Estilos visuales de selección
+            document.getElementById(elegido).classList.remove('bg-gray-800', 'border-transparent');
+            document.getElementById(elegido).classList.add('bg-emerald-900/50', 'border-emerald-500', 'text-emerald-300');
+            
+            document.getElementById(rival).classList.remove('bg-emerald-900/50', 'border-emerald-500', 'text-emerald-300');
+            document.getElementById(rival).classList.add('bg-gray-800', 'border-transparent');
+
+            // Obtener el nombre del equipo ganador
+            let nombreGanador = document.getElementById(elegido).innerText.split(': ').pop();
+            ganadores[cruceId] = nombreGanador;
+
+            // Pasar al siguiente cruce (Cuartos) automáticamente
+            let nextBtn = document.getElementById(siguienteNodoId);
+            nextBtn.innerText = nombreGanador;
+            nextBtn.classList.remove('cursor-not-allowed', 'text-gray-500', 'bg-gray-800');
+            nextBtn.classList.add('bg-gray-700', 'text-white', 'hover:bg-gray-600');
+            nextBtn.disabled = false;
+        }
+
+        // Exportar resultados en texto limpio
+        function exportarPorra() {
+            let txt1a = document.getElementById('txt-1a').innerText;
+            let txt1b = document.getElementById('txt-1b').innerText;
+            
+            let goleador = document.getElementById('p-goleador').value || 'No seleccionado';
+            let mvp = document.getElementById('p-mvp').value || 'No seleccionado';
+            let joven = document.getElementById('p-joven').value || 'No seleccionado';
+            let portero = document.getElementById('p-portero').value || 'No seleccionado';
+
+            let resumen = `🏆 PORRA MUNDIAL DE @nenegda 🏆\n\n`;
+            resumen += `👉 CLASIFICADOS GRUPOS:\n- 1ºA: ${txt1a}\n- 1ºB: ${txt1b}\n\n`;
+            resumen += `⚔️ GANADORES ELIMINATORIAS:\n- Octavos 1: ${ganadores['c1'] || 'Sin elegir'}\n- Octavos 2: ${ganadores['c2'] || 'Sin elegir'}\n\n`;
+            resumen += `🏅 PREMIOS INDIVIDUALES:\n- Goleador: ${goleador}\n- MVP: ${mvp}\n- Joven: ${joven}\n- Portero: ${portero}`;
+
+            navigator.clipboard.writeText(resumen);
+            alert("¡Predicciones copiadas al portapapeles! Envíaselas a tu administrador.");
+        }
+    </script>
+</body>
+</html>
