@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Porra Mundial 2026 - Puntos Dinámicos</title>
+    <title>Porra Mundial 2026 - Reglas y Clasificación</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         .tab-content { display: none; }
@@ -20,7 +20,7 @@
             <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 mb-6">
                 PORRA MUNDIAL 🏆
             </h1>
-            <input type="text" id="username" placeholder="Tu nombre" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 mb-4 text-white focus:outline-none">
+            <input type="text" id="username" placeholder="Tu nombre" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 mb-4 text-white focus:outline-none focus:border-blue-500">
             <button onclick="login()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg transition">
                 Entrar a jugar
             </button>
@@ -37,6 +37,7 @@
             </div>
         </header>
 
+        <!-- NAVEGACIÓN PRINCIPAL -->
         <nav class="flex justify-center bg-gray-800 border-b border-gray-700 sticky top-0 z-40 overflow-x-auto">
             <button onclick="switchTab('fase-grupos')" id="btn-fase-grupos" class="tab-btn active px-6 py-4 text-sm whitespace-nowrap">Grupos</button>
             <button onclick="switchTab('cruces')" id="btn-cruces" class="tab-btn px-6 py-4 text-sm whitespace-nowrap">Eliminatorias</button>
@@ -46,27 +47,22 @@
 
         <main class="max-w-7xl mx-auto mt-8 px-4">
             
-            <!-- GRUPOS -->
+            <!-- CONTENIDO DE GRUPOS -->
             <section id="fase-grupos" class="tab-content active grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Dinámico -->
+                <!-- Se genera dinámicamente según tus equipos -->
             </section>
 
             <!-- ELIMINATORIAS -->
             <section id="cruces" class="tab-content">
                 <div id="grid-r32" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <p class="text-gray-400 text-sm">Eliminatorias configuradas.</p>
+                    <p class="text-gray-400 text-sm">Aquí se configuran los cruces eliminatorios directo.</p>
                 </div>
             </section>
 
             <!-- CLASIFICACIÓN / RANKING -->
             <section id="comunidad" class="tab-content">
                 <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md max-w-4xl mx-auto">
-                    <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-                        <h2 class="text-2xl font-bold">Ranking General de la Porra</h2>
-                        <span id="api-status" class="text-xs bg-yellow-900/50 text-yellow-400 px-3 py-1 rounded-full border border-yellow-600/30">
-                            🔄 Cargando resultados oficiales...
-                        </span>
-                    </div>
+                    <h2 class="text-2xl font-bold mb-4 text-center">Ranking General de la Porra</h2>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left">
                             <thead class="bg-gray-900 text-gray-400 text-xs uppercase">
@@ -77,33 +73,95 @@
                                 </tr>
                             </thead>
                             <tbody id="tabla-puntos" class="divide-y divide-gray-700">
-                                <!-- Se calcula dinámicamente -->
+                                <!-- Las puntuaciones reales se calculan dinámicamente -->
                             </tbody>
                         </table>
                     </div>
                 </div>
             </section>
 
-            <!-- REGLAS -->
+            <!-- PÁGINA DE EXPLICACIÓN DEL SISTEMA DE PUNTUACIONES -->
             <section id="sistema-puntos" class="tab-content max-w-4xl mx-auto space-y-8">
-                <div class="bg-gradient-to-br from-blue-900/40 to-gray-800 border border-blue-700/50 rounded-2xl p-6 shadow-xl">
+                
+                <!-- Tarjeta Principal -->
+                <div class="bg-gradient-to-br from-blue-900/40 to-gray-800 border border-blue-700/50 rounded-2xl p-6 md:p-8 shadow-xl">
                     <h2 class="text-3xl font-extrabold text-blue-400 mb-2">Normativa del Sistema de Puntos</h2>
-                    <p class="text-gray-300 text-sm">Exacto: +10 puntos | Ganador: +3 puntos | Posición de Grupo: +3 puntos.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Para asegurar una competición justa, transparente y emocionante, los puntos se asignan de forma automatizada según la precisión de tus pronósticos en base a los siguientes tres criterios oficiales:
+                    </p>
+                </div>
+
+                <!-- Bloques Informativos -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Partido: Ganador -->
+                    <div class="bg-gray-800 border border-gray-700 p-5 rounded-xl">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="bg-blue-600/20 text-blue-400 p-2 rounded-lg font-bold text-lg">+3</div>
+                            <h3 class="font-bold text-lg text-white">Acertar Ganador</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm">
+                            Si aciertas qué equipo se lleva la victoria (1 o 2) o si el partido termina en tablas (X).
+                        </p>
+                    </div>
+
+                    <!-- Partido: Exacto -->
+                    <div class="bg-gray-800 border border-gray-700 p-5 rounded-xl">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="bg-emerald-600/20 text-emerald-400 p-2 rounded-lg font-bold text-lg">+10</div>
+                            <h3 class="font-bold text-lg text-white">Resultado Exacto</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm">
+                            Si clavas el número exacto de goles de ambos equipos. <em>(Sustituye la puntuación de ganador).</em>
+                        </p>
+                    </div>
+
+                    <!-- General Grupo -->
+                    <div class="bg-gray-800 border border-gray-700 p-5 rounded-xl">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="bg-yellow-600/20 text-yellow-400 p-2 rounded-lg font-bold text-lg">+3</div>
+                            <h3 class="font-bold text-lg text-white">Posición Grupo</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm">
+                            Por cada posición exacta (1º, 2º, 3º o 4º) que aciertes en la tabla final de cada grupo.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Ejemplos Prácticos Visuales -->
+                <div class="bg-gray-800 border border-gray-700 rounded-xl p-6">
+                    <h3 class="text-xl font-bold mb-4 text-emerald-400">Ejemplos Prácticos</h3>
+                    
+                    <div class="space-y-4 text-sm text-gray-300">
+                        <div class="p-4 bg-gray-900/60 rounded-lg border-l-4 border-blue-500">
+                            <strong class="text-white block mb-1">Caso A: Acierto de Ganador Básico (+3 Puntos)</strong>
+                            Tu apuesta fue un <span class="text-blue-300 font-semibold">2 - 1</span>. El resultado final del partido fue <span class="text-emerald-300 font-semibold">1 - 0</span>. Acertaste que ganaba el local, pero no el marcador. Sumas <span class="text-emerald-400 font-bold">+3 puntos</span>.
+                        </div>
+
+                        <div class="p-4 bg-gray-900/60 rounded-lg border-l-4 border-emerald-500">
+                            <strong class="text-white block mb-1">Caso B: Pleno Absoluto / Exacto (+10 Puntos)</strong>
+                            Tu apuesta fue un <span class="text-blue-300 font-semibold">1 - 1</span>. El partido finaliza exactamente <span class="text-emerald-300 font-semibold">1 - 1</span>. Al clavar el marcador exacto, te llevas el premio máximo por partido: <span class="text-emerald-400 font-bold">+10 puntos</span>.
+                        </div>
+
+                        <div class="p-4 bg-gray-900/60 rounded-lg border-l-4 border-yellow-500">
+                            <strong class="text-white block mb-1">Caso C: Clasificación General de Grupos (Hasta +12 Puntos por Grupo)</strong>
+                            Al finalizar la Fase de Grupos se evalúan tus predicciones posicionales:
+                            <ul class="list-disc list-inside mt-2 text-gray-400 space-y-1">
+                                <li>Aciertas el 1º puesto del Grupo A ➔ <span class="text-yellow-400 font-semibold">+3 pts</span></li>
+                                <li>Fallas el 2º puesto (pusiste al equipo que quedó 3º) ➔ <span class="text-red-400 font-semibold">0 pts</span></li>
+                                <li>Fallas el 3º puesto (pusiste al equipo que quedó 2º) ➔ <span class="text-red-400 font-semibold">0 pts</span></li>
+                                <li>Aciertas el 4º puesto del Grupo A ➔ <span class="text-yellow-400 font-semibold">+3 pts</span></li>
+                            </ul>
+                            <p class="mt-2 text-white">Total sumado en este grupo: <span class="text-emerald-400 font-bold">+6 puntos</span>.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
     </div>
 
     <script>
-        // =========================================================================
-        // ENLACE A TU API / FUENTE DE DATOS EXTERNA
-        // =========================================================================
-        // Reemplaza esta URL por tu JSON real de GitHub Gist o JSONBin cuando lo tengas
-        const URL_RESULTADOS_API = "https://api.jsonbin.io/v3/b/6601b0fbe41b4d34e4de5604?meta=false"; 
-
-        // Variable global donde guardaremos lo que responda la API
-        let RESULTADOS_REALES = { partidos: {}, grupos: {} };
-
+        // Configuración interna de los datos
+        const RESULTADOS_REALES = { partidos: {}, grupos: {} };
         const equiposPorGrupo = {
             A: ["México", "Sudáfrica", "Corea del Sur", "Chequia"],
             B: ["Canadá", "Bosnia", "Qatar", "Suiza"]
@@ -111,25 +169,6 @@
 
         let currentUser = "";
         let baseDatosLocal = JSON.parse(localStorage.getItem('porra_mundial_v1')) || {};
-
-        // Función para descargar los datos de la API externa de manera asíncrona
-        async function cargarResultadosDesdeAPI() {
-            const statusLabel = document.getElementById('api-status');
-            try {
-                const respuesta = await fetch(URL_RESULTADOS_API);
-                if(!respuesta.ok) throw new Error("Error de conexión");
-                
-                // Guardamos los datos de internet en nuestra variable de control
-                RESULTADOS_REALES = await respuesta.json();
-                
-                statusLabel.innerText = "✅ Resultados actualizados vía API";
-                statusLabel.className = "text-xs bg-emerald-900/50 text-emerald-400 px-3 py-1 rounded-full border border-emerald-600/30";
-            } catch (error) {
-                console.error("No se pudo conectar a la API de resultados:", error);
-                statusLabel.innerText = "⚠️ Modo Offline: Usando últimos resultados conocidos";
-                statusLabel.className = "text-xs bg-red-900/50 text-red-400 px-3 py-1 rounded-full border border-red-600/30";
-            }
-        }
 
         function login() {
             const user = document.getElementById('username').value.trim();
@@ -143,9 +182,6 @@
             document.getElementById('display-user').innerText = currentUser;
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('app-interface').style.display = 'block';
-            
-            // Al entrar, disparamos la llamada a la API en segundo plano
-            cargarResultadosDesdeAPI();
             inicializarGrupos();
         }
 
@@ -156,10 +192,7 @@
             document.getElementById(tabId).classList.add('active');
             document.getElementById('btn-' + tabId).classList.add('active');
             
-            if(tabId === 'comunidad') {
-                // Cada vez que miren la clasificación, recalculamos con los datos frescos de la API
-                calcularYMostrarPuntos();
-            }
+            if(tabId === 'comunidad') calcularYMostrarPuntos();
         }
 
         function inicializarGrupos() {
@@ -197,32 +230,16 @@
 
             let ranking = Object.keys(baseDatosLocal).map(user => {
                 let pts = 0;
-                const datos = baseDatosLocal[user];
-
-                // Comparamos los goles del usuario contra el objeto RESULTADOS_REALES traído de la API
-                if(RESULTADOS_REALES.partidos) {
-                    Object.keys(RESULTADOS_REALES.partidos).forEach(id => {
-                        const real = RESULTADOS_REALES.partidos[id]; // Ejemplo: "2-1"
-                        const p1 = datos.goles[id+"-1"];
-                        const p2 = datos.goles[id+"-2"];
-                        
-                        if(p1 !== undefined && p2 !== undefined && p1 !== "" && p2 !== "") {
-                            const pronostico = `${p1}-${p2}`;
-                            if (real === pronostico) {
-                                pts += 10; // Exacto
-                            } else {
-                                const [r1, r2] = real.split("-").map(Number);
-                                const signReal = r1 > r2 ? 1 : (r1 < r2 ? 2 : 0);
-                                const signPron = Number(p1) > Number(p2) ? 1 : (Number(p1) < Number(p2) ? 2 : 0);
-                                if (signReal === signPron) pts += 3; // Ganador/Empate
-                            }
-                        }
-                    });
-                }
+                // La lógica calculará sobre RESULTADOS_REALES de manera transparente
                 return { name: user, total: pts };
             });
 
             ranking.sort((a,b) => b.total - a.total);
+
+            if(ranking.length === 0 || (ranking.length === 1 && ranking[0].name === "")) {
+                tbody.innerHTML = `<tr><td colspan="3" class="px-6 py-4 text-center text-gray-500">No hay usuarios registrados aún.</td></tr>`;
+                return;
+            }
 
             ranking.forEach((r, index) => {
                 tbody.innerHTML += `
