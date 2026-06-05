@@ -25,10 +25,10 @@
     <!-- NAVEGACIÓN -->
     <nav class="flex justify-center bg-gray-800 border-b border-gray-700 sticky top-0 z-50 overflow-x-auto">
         <button onclick="switchTab('fase-grupos')" id="btn-fase-grupos" class="tab-btn active px-4 sm:px-6 py-4 text-xs sm:text-sm font-medium border-b-2 border-transparent hover:text-blue-400 whitespace-nowrap transition">
-            1. Los 12 Grupos
+            1. Fase de Grupos
         </button>
         <button onclick="switchTab('cruces')" id="btn-cruces" class="tab-btn px-4 sm:px-6 py-4 text-xs sm:text-sm font-medium border-b-2 border-transparent hover:text-blue-400 whitespace-nowrap transition">
-            2. Eliminatorias Directas
+            2. Fase Eliminatoria (K.O.)
         </button>
         <button onclick="switchTab('premios')" id="btn-premios" class="tab-btn px-4 sm:px-6 py-4 text-xs sm:text-sm font-medium border-b-2 border-transparent hover:text-blue-400 whitespace-nowrap transition">
             3. Premios Especiales
@@ -38,291 +38,15 @@
     <!-- CONTENEDOR PRINCIPAL -->
     <main class="max-w-6xl mx-auto mt-8 px-4">
 
-        <!-- PESTAÑA 1: FASE DE GRUPOS (12 GRUPOS REALES) -->
+        <!-- PESTAÑA 1: FASE DE GRUPOS -->
         <section id="fase-grupos" class="tab-content active space-y-8">
             <div class="bg-blue-900/30 border border-blue-500/30 p-4 rounded-xl text-sm text-blue-300 mb-6">
-                💡 Rellena el resultado de los partidos del nuevo formato de 48 selecciones. Los líderes de grupo se enviarán dinámicamente a la sección de Cruces.
+                💡 Introduce los resultados de los partidos. La tabla de posiciones se actualizará sola y enviará al 1º y 2º de cada grupo directamente a la fase de eliminatorias.
             </div>
 
-            <!-- GRID DE 12 GRUPOS -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <!-- GRUPO A -->
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-md">
-                    <h3 class="text-md font-bold text-blue-400 mb-2 border-b border-gray-700 pb-1">GRUPO A</h3>
-                    <div class="space-y-2" id="grupo-A">
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">México</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="A1" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="A1" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Sudáfrica</span>
-                        </div>
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Corea del Sur</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="A2" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="A2" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Chequia</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GRUPO B -->
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-md">
-                    <h3 class="text-md font-bold text-emerald-400 mb-2 border-b border-gray-700 pb-1">GRUPO B</h3>
-                    <div class="space-y-2" id="grupo-B">
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Canadá</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="B1" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="B1" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Bosnia y H.</span>
-                        </div>
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Qatar</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="B2" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="B2" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Suiza</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GRUPO C -->
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-md">
-                    <h3 class="text-md font-bold text-amber-400 mb-2 border-b border-gray-700 pb-1">GRUPO C</h3>
-                    <div class="space-y-2" id="grupo-C">
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Brasil</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="C1" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="C1" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Marruecos</span>
-                        </div>
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Haití</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="C2" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="C2" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Escocia</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GRUPO D -->
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-md">
-                    <h3 class="text-md font-bold text-purple-400 mb-2 border-b border-gray-700 pb-1">GRUPO D</h3>
-                    <div class="space-y-2" id="grupo-D">
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">EE. UU.</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="D1" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="D1" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Paraguay</span>
-                        </div>
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Australia</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="D2" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="D2" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Turquía</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GRUPO E -->
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-md">
-                    <h3 class="text-md font-bold text-red-400 mb-2 border-b border-gray-700 pb-1">GRUPO E</h3>
-                    <div class="space-y-2" id="grupo-E">
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Alemania</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="E1" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="E1" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Curaçao</span>
-                        </div>
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Costa de M.</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="E2" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="E2" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Ecuador</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GRUPO F -->
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-md">
-                    <h3 class="text-md font-bold text-cyan-400 mb-2 border-b border-gray-700 pb-1">GRUPO F</h3>
-                    <div class="space-y-2" id="grupo-F">
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Países Bajos</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="F1" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="F1" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Japón</span>
-                        </div>
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Túnez</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="F2" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="F2" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Suecia</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GRUPO G -->
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-md">
-                    <h3 class="text-md font-bold text-yellow-500 mb-2 border-b border-gray-700 pb-1">GRUPO G</h3>
-                    <div class="space-y-2" id="grupo-G">
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Bélgica</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="G1" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="G1" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Egipto</span>
-                        </div>
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Irán</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="G2" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="G2" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">N. Zelanda</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GRUPO H -->
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-md">
-                    <h3 class="text-md font-bold text-pink-400 mb-2 border-b border-gray-700 pb-1">GRUPO H</h3>
-                    <div class="space-y-2" id="grupo-H">
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">España</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="H1" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="H1" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Cabo Verde</span>
-                        </div>
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Arabia S.</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="H2" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="H2" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Uruguay</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GRUPO I -->
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-md">
-                    <h3 class="text-md font-bold text-teal-400 mb-2 border-b border-gray-700 pb-1">GRUPO I</h3>
-                    <div class="space-y-2" id="grupo-I">
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Francia</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="I1" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="I1" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Senegal</span>
-                        </div>
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Irak</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="I2" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="I2" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Noruega</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GRUPO J -->
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-md">
-                    <h3 class="text-md font-bold text-orange-400 mb-2 border-b border-gray-700 pb-1">GRUPO J</h3>
-                    <div class="space-y-2" id="grupo-J">
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Argentina</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="J1" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="J1" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Argelia</span>
-                        </div>
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Austria</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="J2" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="J2" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Jordania</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GRUPO K -->
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-md">
-                    <h3 class="text-md font-bold text-violet-400 mb-2 border-b border-gray-700 pb-1">GRUPO K</h3>
-                    <div class="space-y-2" id="grupo-K">
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Portugal</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="K1" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="K1" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Uzbekistán</span>
-                        </div>
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Colombia</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="K2" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="K2" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">R.D. Congo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GRUPO L -->
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-md">
-                    <h3 class="text-md font-bold text-lime-400 mb-2 border-b border-gray-700 pb-1">GRUPO L</h3>
-                    <div class="space-y-2" id="grupo-L">
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Inglaterra</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="L1" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="L1" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Croacia</span>
-                        </div>
-                        <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
-                            <span class="w-5/12 text-right">Ghana</span>
-                            <div class="flex items-center space-x-1 w-2/12 justify-center">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="L2" data-equipo="L">
-                                <input type="number" min="0" class="w-8 bg-gray-700 text-center rounded g-input" data-partido="L2" data-equipo="V">
-                            </div>
-                            <span class="w-5/12 text-left pl-2">Panamá</span>
-                        </div>
-                    </div>
-                </div>
-
+            <!-- CONTENEDOR DINÁMICO DE GRUPOS -->
+            <div id="contenedor-grupos" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Se genera mediante JavaScript para mantener el código limpio y ordenado -->
             </div>
 
             <div class="text-center pt-6">
@@ -332,39 +56,101 @@
             </div>
         </section>
 
-        <!-- PESTAÑA 2: ELIMINATORIAS (ADAPTADO AL FORMATO DE GRANDES LÍDERES) -->
+        <!-- PESTAÑA 2: ELIMINATORIAS DIRECTAS (RONDA DE 32) -->
         <section id="cruces" class="tab-content space-y-8">
             <div class="bg-emerald-900/30 border border-emerald-500/30 p-4 rounded-xl text-sm text-emerald-300 mb-6">
-                ⚡ ¡Fase del K.O.! Elige el ganador definitivo haciendo un clic sobre el botón. Pasará al cruce de la siguiente ronda de forma automática.
+                ⚡ ¡Ronda Eliminatoria! Los clasificados se actualizan solos según tus resultados de grupo. Haz clic en tu equipo favorito en cada cruce para avanzar de ronda.
             </div>
 
+            <!-- DIECISEISEAVOS DE FINAL -->
             <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
-                <h2 class="text-xl font-bold text-amber-400 mb-6 border-b border-gray-700 pb-2">Ronda de Eliminatorias (Cruces Clave)</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <h2 class="text-xl font-bold text-blue-400 mb-6 border-b border-gray-700 pb-2">Dieciseisavos de Final (Ronda de 32)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <!-- Cruce 1 -->
                     <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
-                        <span class="text-[10px] text-gray-500 font-bold">CUARTOS DE FINAL 1</span>
-                        <button id="c1-t1" onclick="elegirGanador('c1', 't1', 'c1-t2', 'semi-t1')" class="text-left p-2 rounded bg-gray-800 text-sm border border-transparent font-medium">Líder A: <span id="txt-a-win">México</span></button>
-                        <button id="c1-t2" onclick="elegirGanador('c1', 't2', 'c1-t1', 'semi-t1')" class="text-left p-2 rounded bg-gray-800 text-sm border border-transparent font-medium">Líder H: <span id="txt-h-win">España</span></button>
+                        <span class="text-[10px] text-gray-500 font-bold">PARTIDO 1</span>
+                        <button id="r32-p1-t1" onclick="avanzarRonda('r32-p1-t1', 'r32-p1-t2', 'oct-p1-t1')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">1º Grupo A: <span id="r32-1A">Esperando...</span></button>
+                        <button id="r32-p1-t2" onclick="avanzarRonda('r32-p1-t2', 'r32-p1-t1', 'oct-p1-t1')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">2º Grupo B: <span id="r32-2B">Esperando...</span></button>
                     </div>
                     <!-- Cruce 2 -->
                     <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
-                        <span class="text-[10px] text-gray-500 font-bold">CUARTOS DE FINAL 2</span>
-                        <button id="c2-t1" onclick="elegirGanador('c2', 't1', 'c2-t2', 'semi-t2')" class="text-left p-2 rounded bg-gray-800 text-sm border border-transparent font-medium">Líder C: <span id="txt-c-win">Brasil</span></button>
-                        <button id="c2-t2" onclick="elegirGanador('c2', 't2', 'c2-t1', 'semi-t2')" class="text-left p-2 rounded bg-gray-800 text-sm border border-transparent font-medium">Líder J: <span id="txt-j-win">Argentina</span></button>
+                        <span class="text-[10px] text-gray-500 font-bold">PARTIDO 2</span>
+                        <button id="r32-p2-t1" onclick="avanzarRonda('r32-p2-t1', 'r32-p2-t2', 'oct-p1-t2')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">1º Grupo C: <span id="r32-1C">Esperando...</span></button>
+                        <button id="r32-p2-t2" onclick="avanzarRonda('r32-p2-t2', 'r32-p2-t1', 'oct-p1-t2')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">2º Grupo D: <span id="r32-2D">Esperando...</span></button>
                     </div>
                     <!-- Cruce 3 -->
                     <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
-                        <span class="text-[10px] text-gray-500 font-bold">CUARTOS DE FINAL 3</span>
-                        <button id="c3-t1" onclick="elegirGanador('c3', 't1', 'c3-t2', 'semi-t3')" class="text-left p-2 rounded bg-gray-800 text-sm border border-transparent font-medium">Líder D: <span id="txt-d-win">EE. UU.</span></button>
-                        <button id="c3-t2" onclick="elegirGanador('c3', 't2', 'c3-t1', 'semi-t3')" class="text-left p-2 rounded bg-gray-800 text-sm border border-transparent font-medium">Líder I: <span id="txt-i-win">Francia</span></button>
+                        <span class="text-[10px] text-gray-500 font-bold">PARTIDO 3</span>
+                        <button id="r32-p3-t1" onclick="avanzarRonda('r32-p3-t1', 'r32-p3-t2', 'oct-p2-t1')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">1º Grupo E: <span id="r32-1E">Esperando...</span></button>
+                        <button id="r32-p3-t2" onclick="avanzarRonda('r32-p3-t2', 'r32-p3-t1', 'oct-p2-t1')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">2º Grupo F: <span id="r32-2F">Esperando...</span></button>
                     </div>
                     <!-- Cruce 4 -->
                     <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
-                        <span class="text-[10px] text-gray-500 font-bold">CUARTOS DE FINAL 4</span>
-                        <button id="c4-t1" onclick="elegirGanador('c4', 't1', 'c4-t2', 'semi-t4')" class="text-left p-2 rounded bg-gray-800 text-sm border border-transparent font-medium">Líder K: <span id="txt-k-win">Portugal</span></button>
-                        <button id="c4-t2" onclick="elegirGanador('c4', 't2', 'c4-t1', 'semi-t4')" class="text-left p-2 rounded bg-gray-800 text-sm border border-transparent font-medium">Líder L: <span id="txt-l-win">Inglaterra</span></button>
+                        <span class="text-[10px] text-gray-500 font-bold">PARTIDO 4</span>
+                        <button id="r32-p4-t1" onclick="avanzarRonda('r32-p4-t1', 'r32-p4-t2', 'oct-p2-t2')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">1º Grupo G: <span id="r32-1G">Esperando...</span></button>
+                        <button id="r32-p4-t2" onclick="avanzarRonda('r32-p4-t2', 'r32-p4-t1', 'oct-p2-t2')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">2º Grupo H: <span id="r32-2H">Esperando...</span></button>
+                    </div>
+                    <!-- Cruce 5 -->
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
+                        <span class="text-[10px] text-gray-500 font-bold">PARTIDO 5</span>
+                        <button id="r32-p5-t1" onclick="avanzarRonda('r32-p5-t1', 'r32-p5-t2', 'oct-p3-t1')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">1º Grupo I: <span id="r32-1I">Esperando...</span></button>
+                        <button id="r32-p5-t2" onclick="avanzarRonda('r32-p5-t2', 'r32-p5-t1', 'oct-p3-t1')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">2º Grupo J: <span id="r32-2J">Esperando...</span></button>
+                    </div>
+                    <!-- Cruce 6 -->
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
+                        <span class="text-[10px] text-gray-500 font-bold">PARTIDO 6</span>
+                        <button id="r32-p6-t1" onclick="avanzarRonda('r32-p6-t1', 'r32-p6-t2', 'oct-p3-t2')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">1º Grupo K: <span id="r32-1K">Esperando...</span></button>
+                        <button id="r32-p6-t2" onclick="avanzarRonda('r32-p6-t2', 'r32-p6-t1', 'oct-p3-t2')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">2º Grupo L: <span id="r32-2L">Esperando...</span></button>
+                    </div>
+                    <!-- Cruce 7 -->
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
+                        <span class="text-[10px] text-gray-500 font-bold">PARTIDO 7</span>
+                        <button id="r32-p7-t1" onclick="avanzarRonda('r32-p7-t1', 'r32-p7-t2', 'oct-p4-t1')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">1º Grupo B: <span id="r32-1B">Esperando...</span></button>
+                        <button id="r32-p7-t2" onclick="avanzarRonda('r32-p7-t2', 'r32-p7-t1', 'oct-p4-t1')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">2º Grupo A: <span id="r32-2A">Esperando...</span></button>
+                    </div>
+                    <!-- Cruce 8 -->
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
+                        <span class="text-[10px] text-gray-500 font-bold">PARTIDO 8</span>
+                        <button id="r32-p8-t1" onclick="avanzarRonda('r32-p8-t1', 'r32-p8-t2', 'oct-p4-t2')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">1º Grupo D: <span id="r32-1D">Esperando...</span></button>
+                        <button id="r32-p8-t2" onclick="avanzarRonda('r32-p8-t2', 'r32-p8-t1', 'oct-p4-t2')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-400">2º Grupo C: <span id="r32-2C">Esperando...</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OCTAVOS DE FINAL -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
+                <h2 class="text-xl font-bold text-teal-400 mb-6 border-b border-gray-700 pb-2">Octavos de Final</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
+                        <button id="oct-p1-t1" onclick="avanzarRonda('oct-p1-t1', 'oct-p1-t2', 'cuart-p1-t1')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-500" disabled>Ganador Partido 1</button>
+                        <button id="oct-p1-t2" onclick="avanzarRonda('oct-p1-t2', 'oct-p1-t1', 'cuart-p1-t1')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-500" disabled>Ganador Partido 2</button>
+                    </div>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
+                        <button id="oct-p2-t1" onclick="avanzarRonda('oct-p2-t1', 'oct-p2-t2', 'cuart-p1-t2')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-500" disabled>Ganador Partido 3</button>
+                        <button id="oct-p2-t2" onclick="avanzarRonda('oct-p2-t2', 'oct-p2-t1', 'cuart-p1-t2')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-500" disabled>Ganador Partido 4</button>
+                    </div>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
+                        <button id="oct-p3-t1" onclick="avanzarRonda('oct-p3-t1', 'oct-p3-t2', 'cuart-p2-t1')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-500" disabled>Ganador Partido 5</button>
+                        <button id="oct-p3-t2" onclick="avanzarRonda('oct-p3-t2', 'oct-p3-t1', 'cuart-p2-t1')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-500" disabled>Ganador Partido 6</button>
+                    </div>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
+                        <button id="oct-p4-t1" onclick="avanzarRonda('oct-p4-t1', 'oct-p4-t2', 'cuart-p2-t2')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-500" disabled>Ganador Partido 7</button>
+                        <button id="oct-p4-t2" onclick="avanzarRonda('oct-p4-t2', 'oct-p4-t1', 'cuart-p2-t2')" class="text-left p-2 rounded bg-gray-800 text-xs font-medium text-gray-500" disabled>Ganador Partido 8</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CUARTOS DE FINAL -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
+                <h2 class="text-xl font-bold text-purple-400 mb-6 border-b border-gray-700 pb-2">Cuartos de Final</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
+                        <button id="cuart-p1-t1" onclick="avanzarRonda('cuart-p1-t1', 'cuart-p1-t2', 'semi-p1-t1')" class="text-left p-2 rounded bg-gray-800 text-sm font-medium text-gray-500" disabled>Ganador Octavos 1</button>
+                        <button id="cuart-p1-t2" onclick="avanzarRonda('cuart-p1-t2', 'cuart-p1-t1', 'semi-p1-t1')" class="text-left p-2 rounded bg-gray-800 text-sm font-medium text-gray-500" disabled>Ganador Octavos 2</button>
+                    </div>
+                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
+                        <button id="cuart-p2-t1" onclick="avanzarRonda('cuart-p2-t1', 'cuart-p2-t2', 'semi-p1-t2')" class="text-left p-2 rounded bg-gray-800 text-sm font-medium text-gray-500" disabled>Ganador Octavos 3</button>
+                        <button id="cuart-p2-t2" onclick="avanzarRonda('cuart-p2-t2', 'cuart-p2-t1', 'semi-p1-t2')" class="text-left p-2 rounded bg-gray-800 text-sm font-medium text-gray-500" disabled>Ganador Octavos 4</button>
                     </div>
                 </div>
             </div>
@@ -372,15 +158,9 @@
             <!-- SEMIFINALES -->
             <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
                 <h2 class="text-xl font-bold text-amber-500 mb-6 border-b border-gray-700 pb-2">Semifinales</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
-                        <button id="semi-t1" onclick="elegirGanador('sf1', '1', '2', 'final-t1')" class="text-left p-2 rounded bg-gray-800 text-sm font-medium text-gray-500 cursor-not-allowed" disabled>Ganador Llave 1</button>
-                        <button id="semi-t2" onclick="elegirGanador('sf1', '2', '1', 'final-t1')" class="text-left p-2 rounded bg-gray-800 text-sm font-medium text-gray-500 cursor-not-allowed" disabled>Ganador Llave 2</button>
-                    </div>
-                    <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
-                        <button id="semi-t3" onclick="elegirGanador('sf2', '3', '4', 'final-t2')" class="text-left p-2 rounded bg-gray-800 text-sm font-medium text-gray-500 cursor-not-allowed" disabled>Ganador Llave 3</button>
-                        <button id="semi-t4" onclick="elegirGanador('sf2', '4', '3', 'final-t2')" class="text-left p-2 rounded bg-gray-800 text-sm font-medium text-gray-500 cursor-not-allowed" disabled>Ganador Llave 4</button>
-                    </div>
+                <div class="max-w-md mx-auto bg-gray-900 p-3 rounded-lg border border-gray-700 flex flex-col space-y-1">
+                    <button id="semi-p1-t1" onclick="avanzarRonda('semi-p1-t1', 'semi-p1-t2', 'final-t1')" class="text-left p-2 rounded bg-gray-800 text-sm font-medium text-gray-500" disabled>Ganador Cuartos 1</button>
+                    <button id="semi-p1-t2" onclick="avanzarRonda('semi-p1-t2', 'semi-p1-t1', 'final-t2')" class="text-left p-2 rounded bg-gray-800 text-sm font-medium text-gray-500" disabled>Ganador Cuartos 2</button>
                 </div>
             </div>
 
@@ -388,16 +168,10 @@
             <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md max-w-md mx-auto text-center">
                 <h2 class="text-xl font-bold text-emerald-400 mb-4 border-b border-gray-700 pb-2">🏆 Gran Final 🏆</h2>
                 <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex flex-col space-y-2">
-                    <button id="final-t1" onclick="definirCampeon('final-t1', 'final-t2')" class="p-3 rounded-lg bg-gray-800 text-md font-bold text-gray-500 cursor-not-allowed" disabled>Finalista 1</button>
+                    <button id="final-t1" onclick="definirCampeon('final-t1', 'final-t2')" class="p-3 rounded-lg bg-gray-800 text-md font-bold text-gray-500" disabled>Finalista 1</button>
                     <div class="text-xs text-gray-600 font-extrabold">VS</div>
-                    <button id="final-t2" onclick="definirCampeon('final-t2', 'final-t1')" class="p-3 rounded-lg bg-gray-800 text-md font-bold text-gray-500 cursor-not-allowed" disabled>Finalista 2</button>
+                    <button id="final-t2" onclick="definirCampeon('final-t2', 'final-t1')" class="p-3 rounded-lg bg-gray-800 text-md font-bold text-gray-500" disabled>Finalista 2</button>
                 </div>
-            </div>
-
-            <div class="text-center pt-4">
-                <button onclick="switchTab('premios')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition">
-                    Siguiente: Premios Individuales →
-                </button>
             </div>
         </section>
 
@@ -405,7 +179,6 @@
         <section id="premios" class="tab-content space-y-8">
             <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
                 <h2 class="text-xl font-bold text-purple-400 mb-6 border-b border-gray-700 pb-2">Premios Individuales del Torneo</h2>
-                
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-sm font-semibold text-gray-300 mb-2">⚽ Máximo Goleador (Bota de Oro)</label>
@@ -428,8 +201,8 @@
 
             <!-- EXPORTAR -->
             <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md text-center">
-                <h3 class="text-lg font-bold mb-2">¡Guardar tu Prode / Porra!</h3>
-                <p class="text-gray-400 text-sm mb-4">Copia las predicciones en limpio para enviarlas por WhatsApp o Telegram.</p>
+                <h3 class="text-lg font-bold mb-2">¡Guardar tu Porra!</h3>
+                <p class="text-gray-400 text-sm mb-4">Copia tus resultados finales para mandarlos a tus amigos.</p>
                 <button onclick="exportarPorra()" class="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-bold py-3 px-10 rounded-xl shadow-lg transition transform hover:scale-105">
                     Copiar Predicciones Oficiales 📋
                 </button>
@@ -439,7 +212,8 @@
     </main>
 
     <script>
-        const defaultGrupos = {
+        const letrasGrupos = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
+        const integrantesDefault = {
             A: ["México", "Sudáfrica", "Corea del Sur", "Chequia"],
             B: ["Canadá", "Bosnia y H.", "Qatar", "Suiza"],
             C: ["Brasil", "Marruecos", "Haití", "Escocia"],
@@ -454,7 +228,6 @@
             L: ["Inglaterra", "Croacia", "Ghana", "Panamá"]
         };
 
-        let ganadoresCruces = {};
         let campeonMundial = "";
 
         function switchTab(tabId) {
@@ -465,44 +238,170 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        document.querySelectorAll('.g-input').forEach(input => {
-            input.addEventListener('input', () => {
-                actualizarClasificados();
-            });
-        });
+        // Generar dinámicamente todos los grupos con sus 3 partidos correspondientes
+        function inicializarFaseGrupos() {
+            const contenedor = document.getElementById('contenedor-grupos');
+            contenedor.innerHTML = "";
 
-        function actualizarClasificados() {
-            const letras = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
-            
-            letras.forEach(l => {
-                let p1l = parseInt(document.querySelector(`[data-partido="${l}1"][data-equipo="L"]`)?.value) || 0;
-                let p1v = parseInt(document.querySelector(`[data-partido="${l}1"][data-equipo="V"]`)?.value) || 0;
+            letrasGrupos.forEach(l => {
+                const eq = integrantesDefault[l];
+                const htmlGrupo = `
+                    <div class="bg-gray-800 border border-gray-700 rounded-xl p-4 shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold text-blue-400 mb-3 border-b border-gray-700 pb-1">GRUPO ${l}</h3>
+                            <div class="space-y-2 mb-4">
+                                <!-- Partido 1 -->
+                                <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
+                                    <span class="w-5/12 text-right font-medium">${eq[0]}</span>
+                                    <div class="flex items-center space-x-1 w-2/12 justify-center">
+                                        <input type="number" min="0" oninput="calcularGrupo('${l}')" id="part-${l}1-L" class="w-8 bg-gray-700 text-center rounded text-white font-bold py-0.5">
+                                        <input type="number" min="0" oninput="calcularGrupo('${l}')" id="part-${l}1-V" class="w-8 bg-gray-700 text-center rounded text-white font-bold py-0.5">
+                                    </div>
+                                    <span class="w-5/12 text-left pl-2 font-medium">${eq[1]}</span>
+                                </div>
+                                <!-- Partido 2 -->
+                                <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
+                                    <span class="w-5/12 text-right font-medium">${eq[2]}</span>
+                                    <div class="flex items-center space-x-1 w-2/12 justify-center">
+                                        <input type="number" min="0" oninput="calcularGrupo('${l}')" id="part-${l}2-L" class="w-8 bg-gray-700 text-center rounded text-white font-bold py-0.5">
+                                        <input type="number" min="0" oninput="calcularGrupo('${l}')" id="part-${l}2-V" class="w-8 bg-gray-700 text-center rounded text-white font-bold py-0.5">
+                                    </div>
+                                    <span class="w-5/12 text-left pl-2 font-medium">${eq[3]}</span>
+                                </div>
+                                <!-- Partido 3 -->
+                                <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
+                                    <span class="w-5/12 text-right font-medium">${eq[0]}</span>
+                                    <div class="flex items-center space-x-1 w-2/12 justify-center">
+                                        <input type="number" min="0" oninput="calcularGrupo('${l}')" id="part-${l}3-L" class="w-8 bg-gray-700 text-center rounded text-white font-bold py-0.5">
+                                        <input type="number" min="0" oninput="calcularGrupo('${l}')" id="part-${l}3-V" class="w-8 bg-gray-700 text-center rounded text-white font-bold py-0.5">
+                                    </div>
+                                    <span class="w-5/12 text-left pl-2 font-medium">${eq[2]}</span>
+                                </div>
+                                <!-- Partido 4 -->
+                                <div class="flex items-center justify-between bg-gray-750 p-2 rounded text-xs">
+                                    <span class="w-5/12 text-right font-medium">${eq[1]}</span>
+                                    <div class="flex items-center space-x-1 w-2/12 justify-center">
+                                        <input type="number" min="0" oninput="calcularGrupo('${l}')" id="part-${l}4-L" class="w-8 bg-gray-700 text-center rounded text-white font-bold py-0.5">
+                                        <input type="number" min="0" oninput="calcularGrupo('${l}')" id="part-${l}4-V" class="w-8 bg-gray-700 text-center rounded text-white font-bold py-0.5">
+                                    </div>
+                                    <span class="w-5/12 text-left pl-2 font-medium">${eq[3]}</span>
+                                </div>
+                            </div>
+                        </div>
 
-                let primero = defaultGrupos[l][0];
-                if (p1v > p1l) { primero = defaultGrupos[l][1]; }
-
-                let txt = document.getElementById(`txt-${l.toLowerCase()}-win`);
-                if(txt) txt.innerText = primero;
+                        <!-- Tabla de Posiciones Interna -->
+                        <div class="bg-gray-900/50 p-2 rounded-lg border border-gray-700/60">
+                            <table class="w-full text-[11px] text-left">
+                                <thead>
+                                    <tr class="text-gray-400 border-b border-gray-700">
+                                        <th class="pb-1 w-6/12">Selección</th>
+                                        <th class="pb-1 text-center">Pts</th>
+                                        <th class="pb-1 text-center">DG</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-${l}">
+                                    <tr id="row-${l}-0"><td class="py-1 font-semibold text-gray-300">${eq[0]}</td><td class="text-center font-bold text-emerald-400">0</td><td class="text-center text-gray-400">0</td></tr>
+                                    <tr id="row-${l}-1"><td class="py-1 font-semibold text-gray-300">${eq[1]}</td><td class="text-center font-bold text-emerald-400">0</td><td class="text-center text-gray-400">0</td></tr>
+                                    <tr id="row-${l}-2"><td class="py-1 font-semibold text-gray-300">${eq[2]}</td><td class="text-center font-bold text-emerald-400">0</td><td class="text-center text-gray-400">0</td></tr>
+                                    <tr id="row-${l}-3"><td class="py-1 font-semibold text-gray-300">${eq[3]}</td><td class="text-center font-bold text-emerald-400">0</td><td class="text-center text-gray-400">0</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+                contenedor.innerHTML += htmlGrupo;
             });
         }
 
-        function elegirGanador(cruceId, elegido, rival, siguienteNodoId) {
-            const elBtn = document.getElementById(`${cruceId}-${elegido}`);
-            const rivBtn = document.getElementById(`${cruceId}-${rival}`);
-            
-            if(!elBtn) return;
-            
-            elBtn.classList.add('bg-emerald-900/50', 'border-emerald-500', 'text-emerald-300');
-            if(rivBtn) rivBtn.classList.remove('bg-emerald-900/50', 'border-emerald-500', 'text-emerald-300');
+        // Lógica para procesar los puntos y ordenar la tabla de posiciones en vivo
+        function calcularGrupo(letra) {
+            const eq = integrantesDefault[letra];
+            let stats = {};
+            eq.forEach(name => { stats[name] = { pts: 0, dg: 0 }; });
 
-            let nombreGanador = elBtn.innerText.split(': ').pop();
-            ganadoresCruces[cruceId] = nombreGanador;
+            // Auxiliar para sumar resultados
+            function procesarPartido(idL, idV, local, visitante) {
+                let gl = parseInt(document.getElementById(idL).value);
+                let gv = parseInt(document.getElementById(idV).value);
 
-            let nextBtn = document.getElementById(siguienteNodoId);
+                if (!isNaN(gl) && !isNaN(gv)) {
+                    stats[local].dg += (gl - gv);
+                    stats[visitante].dg += (gv - gl);
+                    if (gl > gv) { stats[local].pts += 3; }
+                    else if (gv > gl) { stats[visitante].pts += 3; }
+                    else { stats[local].pts += 1; stats[visitante].pts += 1; }
+                }
+            }
+
+            procesarPartido(`part-${letra}1-L`, `part-${letra}1-V`, eq[0], eq[1]);
+            procesarPartido(`part-${letra}2-L`, `part-${letra}2-V`, eq[2], eq[3]);
+            procesarPartido(`part-${letra}3-L`, `part-${letra}3-V`, eq[0], eq[2]);
+            procesarPartido(`part-${letra}4-L`, `part-${letra}4-V`, eq[1], eq[3]);
+
+            // Convertir a Array y ordenar por Puntos -> Diferencia de Goles
+            let ranking = Object.keys(stats).map(name => ({ name: name, pts: stats[name].pts, dg: stats[name].dg }));
+            ranking.sort((a, b) => b.pts - a.pts || b.dg - a.dg);
+
+            // Actualizar la interfaz visual de la tabla
+            const tbody = document.getElementById(`tabla-${letra}`);
+            tbody.innerHTML = "";
+            ranking.forEach((item, index) => {
+                let badge = index < 2 ? '🏆 ' : '';
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="py-1 font-semibold ${index < 2 ? 'text-blue-400' : 'text-gray-400'}">${badge}${item.name}</td>
+                        <td class="text-center font-bold text-emerald-400">${item.pts}</td>
+                        <td class="text-center text-gray-400">${item.dg > 0 ? '+' + item.dg : item.dg}</td>
+                    </tr>
+                `;
+            });
+
+            // Sincronizar dinámicamente con la pantalla de Cruces Eliminatorios (1º y 2º)
+            actualizarNodosDeEliminatorias(letra, ranking[0].name, ranking[1].name);
+        }
+
+        function actualizarNodosDeEliminatorias(letra, primero, segundo) {
+            // Actualiza los textos de los placeholders en los botones de la fase K.O.
+            const contenedores1º = document.querySelectorAll(`[id="r32-1${letra}"]`);
+            const contenedores2º = document.querySelectorAll(`[id="r32-2${letra}"]`);
+
+            contenedores1º.forEach(el => {
+                el.innerText = primero; 
+                let btn = el.closest('button');
+                btn.classList.remove('text-gray-500');
+                btn.classList.add('text-white');
+            });
+            contenedores2º.forEach(el => { 
+                el.innerText = segundo; 
+                let btn = el.closest('button');
+                btn.classList.remove('text-gray-500');
+                btn.classList.add('text-white');
+            });
+        }
+
+        // Lógica de avance de llaves mediante clics
+        function avanzarRonda(idGanador, idPerdedor, idSiguienteNodo) {
+            const btnGanador = document.getElementById(idGanador);
+            const btnPerdedor = document.getElementById(idPerdedor);
+            const nextBtn = document.getElementById(idSiguienteNodo);
+
+            if (!btnGanador || btnGanador.innerText.includes('Esperando...')) return;
+
+            // Cambiar estilos del botón seleccionado
+            btnGanador.classList.add('bg-emerald-950', 'border-emerald-500', 'text-emerald-300', 'font-bold');
+            btnGanador.classList.remove('bg-gray-800', 'text-white');
+
+            if (btnPerdedor) {
+                btnPerdedor.classList.remove('bg-emerald-950', 'border-emerald-500', 'text-emerald-300', 'font-bold');
+                btnPerdedor.classList.add('bg-gray-800', 'text-gray-400');
+            }
+
+            // Enviar el nombre del equipo clasificado al siguiente nodo del árbol
             if (nextBtn) {
-                nextBtn.innerText = nombreGanador;
+                let nombreLimpio = btnGanador.innerText.split(': ').pop();
+                nextBtn.innerText = nombreLimpio;
                 nextBtn.classList.remove('cursor-not-allowed', 'text-gray-500', 'bg-gray-800');
-                nextBtn.classList.add('bg-gray-700', 'text-white', 'hover:bg-gray-600');
+                nextBtn.classList.add('bg-gray-700', 'text-white', 'hover:bg-gray-600', 'font-semibold');
                 nextBtn.disabled = false;
             }
         }
@@ -511,11 +410,11 @@
             const btnF = document.getElementById(idF);
             const btnR = document.getElementById(idRival);
             
-            btnF.classList.add('bg-yellow-600/60', 'border-yellow-400', 'text-yellow-200');
-            btnR.classList.remove('bg-yellow-600/60', 'border-yellow-400', 'text-yellow-200');
+            btnF.classList.add('bg-yellow-600/60', 'border-yellow-400', 'text-yellow-100', 'scale-105');
+            btnR.classList.remove('bg-yellow-600/60', 'border-yellow-400', 'text-yellow-100', 'scale-105');
             
             campeonMundial = btnF.innerText;
-            alert("🏆 ¡Has elegido a tu Campeón del Mundo: " + campeonMundial + "!");
+            alert("🏆 ¡Tu Campeón de la Porra es: " + campeonMundial + "!");
         }
 
         function exportarPorra() {
@@ -529,8 +428,11 @@
             resumen += `🏅 PREMIOS INDIVIDUALES:\n- Bota de Oro: ${goleador}\n- Balón de Oro: ${mvp}\n- Joven: ${joven}\n- Guante de Oro: ${portero}`;
 
             navigator.clipboard.writeText(resumen);
-            alert("¡Todo copiado! Pégaselo al administrador de tu porra.");
+            alert("¡Copiado al portapapeles con éxito!");
         }
+
+        // Arrancar la app al cargar la web
+        window.onload = inicializarFaseGrupos;
     </script>
 </body>
 </html>
