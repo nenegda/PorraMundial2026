@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Porra Mundial 2026 - Reglas y Clasificación</title>
+    <title>Porra Mundial 2026 - Oficial 48 Selecciones</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         .tab-content { display: none; }
@@ -20,7 +20,7 @@
             <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 mb-6">
                 PORRA MUNDIAL 🏆
             </h1>
-            <input type="text" id="username" placeholder="Tu nombre" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 mb-4 text-white focus:outline-none focus:border-blue-500">
+            <input type="text" id="username" placeholder="Tu nombre" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 mb-4 text-white focus:outline-none">
             <button onclick="login()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg transition">
                 Entrar a jugar
             </button>
@@ -30,16 +30,15 @@
     <!-- INTERFAZ PRINCIPAL -->
     <div id="app-interface">
         <header class="bg-gray-800 border-b border-gray-700 p-4 flex justify-between items-center px-8">
-            <h1 class="text-xl font-bold text-blue-400">MUNDIAL 2026</h1>
+            <h1 class="text-xl font-bold text-blue-400">MUNDIAL 2026 🇺🇸 🇲🇽 🇨🇦</h1>
             <div class="flex items-center gap-4">
                 <span class="text-sm">Usuario: <strong id="display-user" class="text-emerald-400"></strong></span>
                 <button onclick="location.reload()" class="text-xs bg-red-900/40 text-red-300 px-2 py-1 rounded hover:bg-red-900/60 transition">Salir</button>
             </div>
         </header>
 
-        <!-- NAVEGACIÓN PRINCIPAL -->
         <nav class="flex justify-center bg-gray-800 border-b border-gray-700 sticky top-0 z-40 overflow-x-auto">
-            <button onclick="switchTab('fase-grupos')" id="btn-fase-grupos" class="tab-btn active px-6 py-4 text-sm whitespace-nowrap">Grupos</button>
+            <button onclick="switchTab('fase-grupos')" id="btn-fase-grupos" class="tab-btn active px-6 py-4 text-sm whitespace-nowrap">Grupos (A-L)</button>
             <button onclick="switchTab('cruces')" id="btn-cruces" class="tab-btn px-6 py-4 text-sm whitespace-nowrap">Eliminatorias</button>
             <button onclick="switchTab('comunidad')" id="btn-comunidad" class="tab-btn px-6 py-4 text-sm whitespace-nowrap text-yellow-400 font-bold">CLASIFICACIÓN 📊</button>
             <button onclick="switchTab('sistema-puntos')" id="btn-sistema-puntos" class="tab-btn px-6 py-4 text-sm whitespace-nowrap text-blue-400 font-bold">REGLAS Y PUNTOS 📜</button>
@@ -47,22 +46,33 @@
 
         <main class="max-w-7xl mx-auto mt-8 px-4">
             
-            <!-- CONTENIDO DE GRUPOS -->
+            <!-- FASE DE GRUPOS OFICIAL (12 GRUPOS) -->
             <section id="fase-grupos" class="tab-content active grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Se genera dinámicamente según tus equipos -->
+                <!-- Se genera dinámicamente con los 48 equipos reales abajo -->
             </section>
 
-            <!-- ELIMINATORIAS -->
+            <!-- ELIMINATORIAS (R32 - DIECISEISAVOS) -->
             <section id="cruces" class="tab-content">
-                <div id="grid-r32" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <p class="text-gray-400 text-sm">Aquí se configuran los cruces eliminatorios directo.</p>
+                <div class="max-w-4xl mx-auto mb-6 bg-blue-900/20 border border-blue-800 p-4 rounded-xl text-center">
+                    <p class="text-sm text-blue-300">
+                        💡 <strong>Formato Oficial:</strong> Clasifican los 2 primeros de cada grupo y los 8 mejores terceros.
+                    </p>
+                </div>
+                <h2 class="text-2xl font-bold mb-6 text-center text-blue-400">Ronda de 16avos de Final (32 Selecciones)</h2>
+                <div id="grid-eliminatorias" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Se genera automáticamente -->
                 </div>
             </section>
 
-            <!-- CLASIFICACIÓN / RANKING -->
+            <!-- CLASIFICACIÓN / RANKING DINÁMICO -->
             <section id="comunidad" class="tab-content">
                 <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md max-w-4xl mx-auto">
-                    <h2 class="text-2xl font-bold mb-4 text-center">Ranking General de la Porra</h2>
+                    <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+                        <h2 class="text-2xl font-bold">Ranking General de la Porra</h2>
+                        <span id="api-status" class="text-xs bg-yellow-900/50 text-yellow-400 px-3 py-1 rounded-full border border-yellow-600/30">
+                            🔄 Cargando resultados oficiales...
+                        </span>
+                    </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left">
                             <thead class="bg-gray-900 text-gray-400 text-xs uppercase">
@@ -73,86 +83,33 @@
                                 </tr>
                             </thead>
                             <tbody id="tabla-puntos" class="divide-y divide-gray-700">
-                                <!-- Las puntuaciones reales se calculan dinámicamente -->
+                                <!-- Datos procesados dinámicamente -->
                             </tbody>
                         </table>
                     </div>
                 </div>
             </section>
 
-            <!-- PÁGINA DE EXPLICACIÓN DEL SISTEMA DE PUNTUACIONES -->
-            <section id="sistema-puntos" class="tab-content max-w-4xl mx-auto space-y-8">
-                
-                <!-- Tarjeta Principal -->
-                <div class="bg-gradient-to-br from-blue-900/40 to-gray-800 border border-blue-700/50 rounded-2xl p-6 md:p-8 shadow-xl">
+            <!-- REGLAS DE PUNTOS OFICIALES -->
+            <section id="sistema-puntos" class="tab-content max-w-4xl mx-auto space-y-6">
+                <div class="bg-gradient-to-br from-blue-900/40 to-gray-800 border border-blue-700/50 rounded-2xl p-6 shadow-xl">
                     <h2 class="text-3xl font-extrabold text-blue-400 mb-2">Normativa del Sistema de Puntos</h2>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        Para asegurar una competición justa, transparente y emocionante, los puntos se asignan de forma automatizada según la precisión de tus pronósticos en base a los siguientes tres criterios oficiales:
+                    <p class="text-gray-300 text-sm">
+                        Los marcadores se obtienen de forma remota. Tu puntuación se actualizará automáticamente bajo estos criterios básicos:
                     </p>
                 </div>
-
-                <!-- Bloques Informativos -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Partido: Ganador -->
-                    <div class="bg-gray-800 border border-gray-700 p-5 rounded-xl">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="bg-blue-600/20 text-blue-400 p-2 rounded-lg font-bold text-lg">+3</div>
-                            <h3 class="font-bold text-lg text-white">Acertar Ganador</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">
-                            Si aciertas qué equipo se lleva la victoria (1 o 2) o si el partido termina en tablas (X).
-                        </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl">
+                        <span class="text-emerald-400 font-bold block text-lg">+10 Puntos</span>
+                        <p class="text-gray-400">Resultado exacto de goles del encuentro.</p>
                     </div>
-
-                    <!-- Partido: Exacto -->
-                    <div class="bg-gray-800 border border-gray-700 p-5 rounded-xl">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="bg-emerald-600/20 text-emerald-400 p-2 rounded-lg font-bold text-lg">+10</div>
-                            <h3 class="font-bold text-lg text-white">Resultado Exacto</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">
-                            Si clavas el número exacto de goles de ambos equipos. <em>(Sustituye la puntuación de ganador).</em>
-                        </p>
+                    <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl">
+                        <span class="text-blue-400 font-bold block text-lg">+3 Puntos</span>
+                        <p class="text-gray-400">Acertar ganador o empate (si no acertaste el marcador exacto).</p>
                     </div>
-
-                    <!-- General Grupo -->
-                    <div class="bg-gray-800 border border-gray-700 p-5 rounded-xl">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="bg-yellow-600/20 text-yellow-400 p-2 rounded-lg font-bold text-lg">+3</div>
-                            <h3 class="font-bold text-lg text-white">Posición Grupo</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm">
-                            Por cada posición exacta (1º, 2º, 3º o 4º) que aciertes en la tabla final de cada grupo.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Ejemplos Prácticos Visuales -->
-                <div class="bg-gray-800 border border-gray-700 rounded-xl p-6">
-                    <h3 class="text-xl font-bold mb-4 text-emerald-400">Ejemplos Prácticos</h3>
-                    
-                    <div class="space-y-4 text-sm text-gray-300">
-                        <div class="p-4 bg-gray-900/60 rounded-lg border-l-4 border-blue-500">
-                            <strong class="text-white block mb-1">Caso A: Acierto de Ganador Básico (+3 Puntos)</strong>
-                            Tu apuesta fue un <span class="text-blue-300 font-semibold">2 - 1</span>. El resultado final del partido fue <span class="text-emerald-300 font-semibold">1 - 0</span>. Acertaste que ganaba el local, pero no el marcador. Sumas <span class="text-emerald-400 font-bold">+3 puntos</span>.
-                        </div>
-
-                        <div class="p-4 bg-gray-900/60 rounded-lg border-l-4 border-emerald-500">
-                            <strong class="text-white block mb-1">Caso B: Pleno Absoluto / Exacto (+10 Puntos)</strong>
-                            Tu apuesta fue un <span class="text-blue-300 font-semibold">1 - 1</span>. El partido finaliza exactamente <span class="text-emerald-300 font-semibold">1 - 1</span>. Al clavar el marcador exacto, te llevas el premio máximo por partido: <span class="text-emerald-400 font-bold">+10 puntos</span>.
-                        </div>
-
-                        <div class="p-4 bg-gray-900/60 rounded-lg border-l-4 border-yellow-500">
-                            <strong class="text-white block mb-1">Caso C: Clasificación General de Grupos (Hasta +12 Puntos por Grupo)</strong>
-                            Al finalizar la Fase de Grupos se evalúan tus predicciones posicionales:
-                            <ul class="list-disc list-inside mt-2 text-gray-400 space-y-1">
-                                <li>Aciertas el 1º puesto del Grupo A ➔ <span class="text-yellow-400 font-semibold">+3 pts</span></li>
-                                <li>Fallas el 2º puesto (pusiste al equipo que quedó 3º) ➔ <span class="text-red-400 font-semibold">0 pts</span></li>
-                                <li>Fallas el 3º puesto (pusiste al equipo que quedó 2º) ➔ <span class="text-red-400 font-semibold">0 pts</span></li>
-                                <li>Aciertas el 4º puesto del Grupo A ➔ <span class="text-yellow-400 font-semibold">+3 pts</span></li>
-                            </ul>
-                            <p class="mt-2 text-white">Total sumado en este grupo: <span class="text-emerald-400 font-bold">+6 puntos</span>.</p>
-                        </div>
+                    <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl">
+                        <span class="text-yellow-400 font-bold block text-lg">+3 Puntos</span>
+                        <p class="text-gray-400">Por cada posición exacta final que aciertes en los grupos.</p>
                     </div>
                 </div>
             </section>
@@ -160,15 +117,54 @@
     </div>
 
     <script>
-        // Configuración interna de los datos
-        const RESULTADOS_REALES = { partidos: {}, grupos: {} };
+        // Endpoint de conexión de datos remotos
+        const URL_RESULTADOS_API = "https://api.jsonbin.io/v3/b/6601b0fbe41b4d34e4de5604?meta=false"; 
+        let RESULTADOS_REALES = { partidos: {}, grupos: {} };
+
+        // CONFIGURACIÓN OFICIAL REAL 12 GRUPOS - MUNDIAL 2026
         const equiposPorGrupo = {
-            A: ["México", "Sudáfrica", "Corea del Sur", "Chequia"],
-            B: ["Canadá", "Bosnia", "Qatar", "Suiza"]
+            A: ["México", "Sudáfrica", "Corea del Sur", "República Checa"],
+            B: ["Canadá", "Bosnia y Herzegovina", "Catar", "Suiza"],
+            C: ["Brasil", "Marruecos", "Haití", "Escocia"],
+            D: ["Estados Unidos", "Paraguay", "Australia", "Turquía"],
+            E: ["Alemania", "Curazao", "Costa de Marfil", "Ecuador"],
+            F: ["Países Bajos", "Japón", "Suecia", "Túnez"],
+            G: ["Bélgica", "Egipto", "Irán", "Nueva Zelanda"],
+            H: ["España", "Cabo Verde", "Arabia Saudita", "Uruguay"],
+            I: ["Francia", "Senegal", "Irak", "Noruega"],
+            J: ["Argentina", "Argelia", "Austria", "Jordania"],
+            K: ["Portugal", "RD Congo", "Uzbekistán", "Colombia"],
+            L: ["Inglaterra", "Croacia", "Ghana", "Panamá"]
         };
 
+        // Estructura simplificada para la simulación inicial de eliminatorias (Cruces principales)
+        const crucesEliminatorias = [
+            { id: "R32_1", e1: "1º Grupo A", e2: "3º Grupo C/D/E" },
+            { id: "R32_2", e1: "1º Grupo B", e2: "2º Grupo F" },
+            { id: "R32_3", e1: "1º Grupo C", e2: "2º Grupo E" },
+            { id: "R32_4", e1: "1º Grupo D", e2: "3º Grupo F/G/H" },
+            { id: "R32_5", e1: "1º Grupo E", e2: "2º Grupo A" },
+            { id: "R32_6", e1: "1º Grupo F", e2: "2º Grupo B" },
+            { id: "R32_7", e1: "1º Grupo G", e2: "3º Grupo I/J/K" },
+            { id: "R32_8", e1: "1º Grupo H", e2: "2º Grupo J" }
+        ];
+
         let currentUser = "";
-        let baseDatosLocal = JSON.parse(localStorage.getItem('porra_mundial_v1')) || {};
+        let baseDatosLocal = JSON.parse(localStorage.getItem('porra_mundial_oficial')) || {};
+
+        async function cargarResultadosDesdeAPI() {
+            const statusLabel = document.getElementById('api-status');
+            try {
+                const respuesta = await fetch(URL_RESULTADOS_API);
+                if(!respuesta.ok) throw new Error();
+                RESULTADOS_REALES = await respuesta.json();
+                statusLabel.innerText = "✅ Resultados oficiales conectados";
+                statusLabel.className = "text-xs bg-emerald-900/50 text-emerald-400 px-3 py-1 rounded-full border border-emerald-600/30";
+            } catch (error) {
+                statusLabel.innerText = "⚠️ Sin conexión directa (Resultados guardados localmente)";
+                statusLabel.className = "text-xs bg-amber-900/50 text-amber-400 px-3 py-1 rounded-full border border-amber-600/30";
+            }
+        }
 
         function login() {
             const user = document.getElementById('username').value.trim();
@@ -176,13 +172,16 @@
             currentUser = user;
             
             if (!baseDatosLocal[currentUser]) {
-                baseDatosLocal[currentUser] = { goles: {}, grupos: {} };
+                baseDatosLocal[currentUser] = { goles: {} };
             }
 
             document.getElementById('display-user').innerText = currentUser;
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('app-interface').style.display = 'block';
+            
+            cargarResultadosDesdeAPI();
             inicializarGrupos();
+            inicializarEliminatorias();
         }
 
         function switchTab(tabId) {
@@ -198,20 +197,60 @@
         function inicializarGrupos() {
             const container = document.getElementById('fase-grupos');
             container.innerHTML = "";
-            Object.keys(equiposPorGrupo).forEach(l => {
-                const eq = equiposPorGrupo[l];
+            
+            Object.keys(equiposPorGrupo).forEach(letra => {
+                const eq = equiposPorGrupo[letra];
+                
+                // Muestra la primera jornada clave de forma ilustrativa para cada grupo
+                const partidos = [
+                    { id: `${letra}_p1`, local: eq[0], visitante: eq[1] },
+                    { id: `${letra}_p2`, local: eq[2], visitante: eq[3] }
+                ];
+
+                let htmlPartidos = "";
+                partidos.forEach(p => {
+                    htmlPartidos += `
+                        <div class="flex items-center justify-between gap-1 text-sm bg-gray-900/50 p-2.5 rounded border border-gray-700/50">
+                            <span class="w-24 truncate text-gray-200 font-medium">${p.local}</span>
+                            <div class="flex items-center gap-1">
+                                <input type="number" oninput="guardar('${p.id}-1', this.value)" value="${baseDatosLocal[currentUser].goles[p.id+'-1'] || ''}" class="w-10 bg-gray-900 border border-gray-700 text-center rounded text-white p-1 focus:border-blue-500 outline-none">
+                                <span class="text-gray-600 font-bold">-</span>
+                                <input type="number" oninput="guardar('${p.id}-2', this.value)" value="${baseDatosLocal[currentUser].goles[p.id+'-2'] || ''}" class="w-10 bg-gray-900 border border-gray-700 text-center rounded text-white p-1 focus:border-blue-500 outline-none">
+                            </div>
+                            <span class="w-24 text-right truncate text-gray-200 font-medium">${p.visitante}</span>
+                        </div>
+                    `;
+                });
+
                 container.innerHTML += `
-                    <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl">
-                        <h3 class="font-bold text-blue-400 mb-3">GRUPO ${l}</h3>
+                    <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl shadow-lg">
+                        <h3 class="font-bold text-blue-400 mb-3 border-b border-gray-700 pb-1.5 tracking-wide">
+                            GRUPO ${letra}
+                        </h3>
+                        <div class="space-y-3">
+                            ${htmlPartidos}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function inicializarEliminatorias() {
+            const container = document.getElementById('grid-eliminatorias');
+            container.innerHTML = "";
+
+            crucesEliminatorias.forEach(c => {
+                container.innerHTML += `
+                    <div class="bg-gray-800 border border-gray-700 p-4 rounded-xl flex flex-col justify-between shadow-md">
+                        <span class="text-[10px] text-blue-400 font-extrabold uppercase mb-2 tracking-wider">${c.id}</span>
                         <div class="space-y-2">
-                            <div class="flex items-center justify-between gap-2">
-                                <span class="text-xs w-20 truncate">${eq[0]}</span>
-                                <div class="flex items-center gap-1">
-                                    <input type="number" oninput="guardar('${l}1-1', this.value)" value="${baseDatosLocal[currentUser].goles[l+'1-1'] || ''}" class="w-10 bg-gray-900 text-center rounded p-1 text-white">
-                                    <span>-</span>
-                                    <input type="number" oninput="guardar('${l}1-2', this.value)" value="${baseDatosLocal[currentUser].goles[l+'1-2'] || ''}" class="w-10 bg-gray-900 text-center rounded p-1 text-white">
-                                </div>
-                                <span class="text-xs w-20 text-right truncate">${eq[1]}</span>
+                            <div class="flex justify-between items-center bg-gray-900/60 p-2 rounded border border-gray-700/40">
+                                <span class="text-xs text-gray-300 font-medium truncate">${c.e1}</span>
+                                <input type="number" oninput="guardar('${c.id}-1', this.value)" value="${baseDatosLocal[currentUser].goles[c.id+'-1'] || ''}" class="w-10 bg-gray-900 border border-gray-700 text-center rounded text-white text-xs p-1 outline-none">
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-900/60 p-2 rounded border border-gray-700/40">
+                                <span class="text-xs text-gray-300 font-medium truncate">${c.e2}</span>
+                                <input type="number" oninput="guardar('${c.id}-2', this.value)" value="${baseDatosLocal[currentUser].goles[c.id+'-2'] || ''}" class="w-10 bg-gray-900 border border-gray-700 text-center rounded text-white text-xs p-1 outline-none">
                             </div>
                         </div>
                     </div>
@@ -221,7 +260,7 @@
 
         function guardar(id, val) {
             baseDatosLocal[currentUser].goles[id] = val;
-            localStorage.setItem('porra_mundial_v1', JSON.stringify(baseDatosLocal));
+            localStorage.setItem('porra_mundial_oficial', JSON.stringify(baseDatosLocal));
         }
 
         function calcularYMostrarPuntos() {
@@ -230,23 +269,38 @@
 
             let ranking = Object.keys(baseDatosLocal).map(user => {
                 let pts = 0;
-                // La lógica calculará sobre RESULTADOS_REALES de manera transparente
+                const datos = baseDatosLocal[user];
+
+                if(RESULTADOS_REALES.partidos) {
+                    Object.keys(RESULTADOS_REALES.partidos).forEach(id => {
+                        const real = RESULTADOS_REALES.partidos[id]; 
+                        const p1 = datos.goles[id+"-1"];
+                        const p2 = datos.goles[id+"-2"];
+                        
+                        if(p1 !== undefined && p2 !== undefined && p1 !== "" && p2 !== "") {
+                            const pronostico = `${p1}-${p2}`;
+                            if (real === pronostico) {
+                                pts += 10; 
+                            } else {
+                                const [r1, r2] = real.split("-").map(Number);
+                                const signReal = r1 > r2 ? 1 : (r1 < r2 ? 2 : 0);
+                                const signPron = Number(p1) > Number(p2) ? 1 : (Number(p1) < Number(p2) ? 2 : 0);
+                                if (signReal === signPron) pts += 3; 
+                            }
+                        }
+                    });
+                }
                 return { name: user, total: pts };
             });
 
             ranking.sort((a,b) => b.total - a.total);
 
-            if(ranking.length === 0 || (ranking.length === 1 && ranking[0].name === "")) {
-                tbody.innerHTML = `<tr><td colspan="3" class="px-6 py-4 text-center text-gray-500">No hay usuarios registrados aún.</td></tr>`;
-                return;
-            }
-
             ranking.forEach((r, index) => {
                 tbody.innerHTML += `
                     <tr class="hover:bg-gray-700/30 transition">
-                        <td class="px-6 py-4 font-bold text-gray-400">${index + 1}</td>
-                        <td class="px-6 py-4 font-semibold text-white capitalize">${r.name}</td>
-                        <td class="px-6 py-4 text-emerald-400 font-bold text-right">${r.total} pts</td>
+                        <td class="px-6 py-4 font-bold text-gray-400 text-sm">${index + 1}</td>
+                        <td class="px-6 py-4 font-semibold text-white capitalize text-sm">${r.name}</td>
+                        <td class="px-6 py-4 text-emerald-400 font-bold text-right text-sm">${r.total} pts</td>
                     </tr>
                 `;
             });
